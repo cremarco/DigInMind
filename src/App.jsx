@@ -1,7 +1,213 @@
 import { useEffect, useMemo, useState } from 'react'
+import { geoPath, geoMercator, geoCentroid, geoBounds } from 'd3'
+import { feature } from 'topojson-client'
+import countriesTopology from 'world-atlas/countries-110m.json'
 import { ArrowRight, Brain, Users, Globe, Lightbulb, AlertTriangle, Target, Network, Microscope, Heart, Mail, MapPin, AlertCircle } from 'lucide-react'
 import costLogo from '/images/logo-white.svg'
 import membersData from './data/members.json'
+
+const MAP_WIDTH = 760
+const MAP_HEIGHT = 520
+
+const COUNTRY_NAME_NORMALISERS = new Map([
+  ['Macedonia', 'North Macedonia'],
+  ['Bosnia and Herz.', 'Bosnia and Herzegovina'],
+  ['Czechia', 'Czech Republic'],
+])
+
+const getDisplayCountryName = (name) => COUNTRY_NAME_NORMALISERS.get(name) ?? name
+
+const EUROPEAN_COUNTRY_NAMES = new Set([
+  'Albania',
+  'Armenia',
+  'Austria',
+  'Azerbaijan',
+  'Belarus',
+  'Belgium',
+  'Bosnia and Herz.',
+  'Bulgaria',
+  'Croatia',
+  'Cyprus',
+  'Czechia',
+  'Denmark',
+  'Estonia',
+  'Finland',
+  'France',
+  'Georgia',
+  'Germany',
+  'Greece',
+  'Hungary',
+  'Iceland',
+  'Ireland',
+  'Italy',
+  'Kosovo',
+  'Latvia',
+  'Lithuania',
+  'Luxembourg',
+  'Macedonia',
+  'Malta',
+  'Moldova',
+  'Montenegro',
+  'Netherlands',
+  'Norway',
+  'Poland',
+  'Portugal',
+  'Romania',
+  'Russia',
+  'Serbia',
+  'Slovakia',
+  'Slovenia',
+  'Spain',
+  'Sweden',
+  'Switzerland',
+  'Turkey',
+  'Ukraine',
+  'United Kingdom',
+])
+
+const EUROPE_BOUNDARY = {
+  minLatitude: 32,
+  maxLatitude: 72,
+  minLongitude: -25,
+  maxLongitude: 45,
+}
+
+function EuropeMap({ countriesWithMembers }) {
+  const { countries, matchedParticipants } = useMemo(() => {
+    const participatingCountries = new Set(countriesWithMembers)
+
+    const worldFeatures = feature(countriesTopology, countriesTopology.objects.countries).features
+    const europeanFeatures = worldFeatures.filter(({ properties, geometry }) => {
+      if (!EUROPEAN_COUNTRY_NAMES.has(properties.name)) {
+        return false
+      }
+
+      const bounds = geoBounds({ type: 'Feature', geometry, properties })
+      const [[minLon, minLat], [maxLon, maxLat]] = bounds
+
+      return (
+        maxLon >= EUROPE_BOUNDARY.minLongitude &&
+        minLon <= EUROPE_BOUNDARY.maxLongitude &&
+        maxLat >= EUROPE_BOUNDARY.minLatitude &&
+        minLat <= EUROPE_BOUNDARY.maxLatitude
+      )
+    })
+
+    const foundParticipants = new Map(
+      europeanFeatures
+        .filter(({ properties }) => participatingCountries.has(getDisplayCountryName(properties.name)))
+        .map((featureItem) => [featureItem.properties.name, featureItem]),
+    )
+
+    return {
+      countries: europeanFeatures,
+      matchedParticipants: foundParticipants,
+    }
+  }, [countriesWithMembers])
+
+  const projection = useMemo(() => {
+    const projectionInstance = geoMercator()
+    const focusFeatures = matchedParticipants.size > 0 ? Array.from(matchedParticipants.values()) : countries
+
+    if (focusFeatures.length > 0) {
+      const featureCollection = { type: 'FeatureCollection', features: focusFeatures }
+      const padding = matchedParticipants.size > 0 ? 60 : 28
+      projectionInstance.fitExtent(
+        [
+          [padding, padding],
+          [MAP_WIDTH - padding, MAP_HEIGHT - padding],
+        ],
+        featureCollection,
+      )
+    } else {
+      projectionInstance
+        .center([20, 55])
+        .scale(600)
+        .translate([MAP_WIDTH / 2, MAP_HEIGHT / 2])
+    }
+
+    return projectionInstance
+  }, [countries, matchedParticipants])
+
+  const pathGenerator = useMemo(() => geoPath(projection), [projection])
+
+  const markers = useMemo(() => {
+    return Array.from(matchedParticipants.values())
+      .map((countryFeature) => {
+        const centroid = geoCentroid(countryFeature)
+        const coordinates = projection(centroid)
+
+        if (!coordinates || Number.isNaN(coordinates[0]) || Number.isNaN(coordinates[1])) {
+          return null
+        }
+
+        return {
+          name: countryFeature.properties.name,
+          coordinates,
+        }
+      })
+      .filter(Boolean)
+  }, [matchedParticipants, projection])
+
+  return (
+    <svg
+      viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
+      role="img"
+      aria-label="Map of Europe highlighting participating countries"
+      className="w-full"
+    >
+      <defs>
+        <linearGradient id="europe-map-background" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#0f172a" stopOpacity="0.95" />
+          <stop offset="100%" stopColor="#1e293b" stopOpacity="0.9" />
+        </linearGradient>
+      </defs>
+
+      <rect width={MAP_WIDTH} height={MAP_HEIGHT} fill="url(#europe-map-background)" />
+
+      {countries.map((countryFeature) => {
+        const path = pathGenerator(countryFeature)
+
+        if (!path) {
+          return null
+        }
+
+        const countryName = countryFeature.properties.name
+        const isHighlighted = matchedParticipants.has(countryName)
+        const label = getDisplayCountryName(countryName)
+
+        return (
+          <path
+            key={countryName}
+            d={path}
+            fill={isHighlighted ? '#2563eb' : '#64748b'}
+            fillOpacity={isHighlighted ? 0.9 : 0.45}
+            stroke="#0f172a"
+            strokeOpacity={0.5}
+            strokeWidth={0.6}
+          >
+            <title>{label}</title>
+          </path>
+        )
+      })}
+
+      {markers.map((marker) => (
+        <g key={marker.name} className="pointer-events-none">
+          <circle
+            cx={marker.coordinates[0]}
+            cy={marker.coordinates[1]}
+            r={6}
+            fill="#38bdf8"
+            stroke="#0f172a"
+            strokeWidth={1.4}
+          >
+            <title>{getDisplayCountryName(marker.name)}</title>
+          </circle>
+        </g>
+      ))}
+    </svg>
+  )
+}
 
 // Utility function for smooth scrolling
 function smoothScrollTo(id, offset = 80) {
@@ -245,11 +451,29 @@ function App() {
     }
   `
 
-  const membersCount = useMemo(() => membersData.length, [])
-  const countriesCount = useMemo(
-    () => new Set(membersData.map((member) => member.country)).size,
-    [],
+  const uniqueCountriesWithMembers = useMemo(() => {
+    const counts = membersData.reduce((accumulator, member) => {
+      const displayName = getDisplayCountryName(member.country)
+      if (!accumulator.has(displayName)) {
+        accumulator.set(displayName, 0)
+      }
+
+      accumulator.set(displayName, accumulator.get(displayName) + 1)
+      return accumulator
+    }, new Map())
+
+    return Array.from(counts.entries())
+      .map(([country, count]) => ({ country, count }))
+      .sort((a, b) => a.country.localeCompare(b.country))
+  }, [])
+
+  const participatingCountries = useMemo(
+    () => uniqueCountriesWithMembers.map(({ country }) => country),
+    [uniqueCountriesWithMembers],
   )
+
+  const membersCount = useMemo(() => membersData.length, [])
+  const countriesCount = participatingCountries.length
 
   const stats = useMemo(
     () => [
@@ -661,6 +885,45 @@ function App() {
               <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Our vision</h2>
               <div className={`${narrativeClasses} mx-auto max-w-3xl text-white/80`}>
                 <p>Through this COST Action, we envision a future where digital innovation complements human expertise to provide more accurate, accessible, and personalised mental health care. By fostering collaboration across borders and disciplines, DigInMind will contribute to reducing the burden of mental health disorders and improving quality of life for millions of Europeans.</p>
+              </div>
+            </div>
+          </section>
+
+          {/* Network map */}
+          <section id="network-map" className={`bg-white ${sectionSpacing}`}>
+            <div className={containerClasses}>
+              <div className="mx-auto max-w-3xl text-center">
+                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-blue-600">European network</p>
+                <h2 className="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl">Participating countries</h2>
+                <p className="mt-6 text-lg text-slate-600">
+                  The DigInMind network already connects specialists across Europe. Highlighted countries show where members currently contribute to the initiative.
+                </p>
+              </div>
+
+              <div className="mt-16 grid gap-12 lg:grid-cols-[3fr,minmax(0,2fr)] lg:items-center">
+                <div className="overflow-hidden border border-slate-200 shadow-xl">
+                  <EuropeMap countriesWithMembers={participatingCountries} />
+                </div>
+
+                <div className="flex flex-col gap-8">
+                  <div className="space-y-3">
+                    <p className="text-xs font-semibold uppercase tracking-[0.35em] text-slate-500">Countries represented</p>
+                    <ul className="space-y-3 text-sm text-slate-600">
+                      {uniqueCountriesWithMembers.map(({ country, count }) => (
+                        <li key={country} className="flex items-center justify-between gap-6 border border-slate-200 bg-slate-50 px-5 py-3">
+                          <span className="font-semibold text-slate-800">{country}</span>
+                          <span className="text-xs uppercase tracking-[0.25em] text-blue-600">{count} member{count > 1 ? 's' : ''}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="border border-blue-100 bg-blue-50/80 p-6 text-left shadow-md">
+                    <p className="text-sm text-slate-700">
+                      We actively welcome partners from additional countries. Reach out if you would like to collaborate or represent your national community within DigInMind.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </section>
