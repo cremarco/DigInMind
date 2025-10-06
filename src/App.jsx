@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { ArrowRight, Brain, Users, Globe, Lightbulb, AlertTriangle, Target, Network, Microscope, Heart, Mail, MapPin, AlertCircle } from 'lucide-react'
 import costLogo from '/images/logo-white.svg'
+import membersData from './data/members.json'
 
 // Utility function for smooth scrolling
 function smoothScrollTo(id, offset = 80) {
@@ -244,13 +245,19 @@ function App() {
     }
   `
 
+  const membersCount = useMemo(() => membersData.length, [])
+  const countriesCount = useMemo(
+    () => new Set(membersData.map((member) => member.country)).size,
+    [],
+  )
+
   const stats = useMemo(
     () => [
-      { value: 25, suffix: '+', label: 'Institutions engaged' },
-      { value: 12, suffix: '', label: 'Countries represented' },
+      { value: membersCount, suffix: '', label: 'Actual members' },
+      { value: countriesCount, suffix: '', label: 'Countries represented' },
       { value: 4, suffix: '', label: 'Focus domains' },
     ],
-    [],
+    [membersCount, countriesCount],
   )
 
   // Shared layout utilities keep section spacing and copy styling consistent
