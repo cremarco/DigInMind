@@ -18,15 +18,6 @@ export default function Home() {
               A pan-European COST network proposal connecting psychologists, clinicians, and computer scientists to advance AI-assisted mental-health diagnosis and early intervention.
             </p>
             
-            <div className="bg-white p-6 rounded-lg shadow-md mb-10 max-w-3xl mx-auto">
-              <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
-                Mental health challenges are rising across Europe, yet early diagnosis and intervention remain limited by resource constraints and diagnostic complexity. 
-                DigInMind aims to build a collaborative European network that bridges clinical expertise with cutting-edge technological innovation. 
-                By bringing together diverse disciplines, we seek to develop AI-assisted tools for more accurate, accessible, and timely mental health support, 
-                ultimately improving outcomes for individuals and communities across the continent.
-              </p>
-            </div>
-            
             <Link
               to="/about"
               className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
@@ -34,6 +25,49 @@ export default function Home() {
               Learn more about the proposal
               <ArrowRight className="w-5 h-5" />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission Statement */}
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gray-50 p-8 shadow-md">
+            <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
+              Mental health challenges are rising across Europe, yet early diagnosis and intervention remain limited by resource constraints and diagnostic complexity.
+              DigInMind aims to build a collaborative European network that bridges clinical expertise with cutting-edge technological innovation.
+              By bringing together diverse disciplines, we seek to develop AI-assisted tools for more accurate, accessible, and timely mental health support,
+              ultimately improving outcomes for individuals and communities across the continent.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Main Proponents */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+            Main Proponents
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white shadow-md p-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Dr. Marco Cremaschi</h3>
+              <p className="text-gray-600">
+                Department of Informatics, Systems and Communication (DISCo), University of Milano-Bicocca
+              </p>
+            </div>
+            <div className="bg-white shadow-md p-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Prof. Antonio Preti</h3>
+              <p className="text-gray-600">
+                Dipartimento di Neuroscienze "Rita Levi Montalcini", University of Torino
+              </p>
+            </div>
+            <div className="bg-white shadow-md p-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Dr. Francesco Bevione</h3>
+              <p className="text-gray-600">
+                Dipartimento di Neuroscienze "Rita Levi Montalcini", University of Torino
+              </p>
+            </div>
           </div>
         </div>
       </section>
