@@ -1,4 +1,5 @@
 import { Mail, Users, Globe } from 'lucide-react'
+import { smoothScrollTo } from '../utils/scroll'
 
 export default function Footer() {
   return (
@@ -22,7 +23,14 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/contact" className="flex items-center gap-3 rounded-md bg-white/10 px-4 py-3 text-white/85 shadow-sm transition hover:bg-white/15">
+                <a
+                  href="#contact"
+                  onClick={(event) => {
+                    event.preventDefault()
+                    smoothScrollTo('contact')
+                  }}
+                  className="flex items-center gap-3 rounded-md bg-white/10 px-4 py-3 text-white/85 shadow-sm transition hover:bg-white/15"
+                >
                   <Users className="h-4 w-4" />
                   Join the Network
                 </a>
@@ -36,7 +44,11 @@ export default function Footer() {
               Interested in joining our network? Reach out to learn more about collaboration opportunities.
             </p>
             <a
-              href="/contact"
+              href="#contact"
+              onClick={(event) => {
+                event.preventDefault()
+                smoothScrollTo('contact')
+              }}
               className="inline-flex items-center gap-3 rounded-md bg-white/10 px-4 py-3 text-sm font-medium uppercase tracking-[0.3em] text-white shadow-sm transition hover:bg-white/15"
             >
               <Mail className="h-4 w-4" />
