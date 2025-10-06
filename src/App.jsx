@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { geoPath, geoMercator, geoCentroid, geoBounds } from 'd3'
 import { feature } from 'topojson-client'
 import countriesTopology from 'world-atlas/countries-110m.json'
-import { ArrowRight, Brain, Users, Globe, Lightbulb, AlertTriangle, Target, Network, Microscope, Heart, Mail, MapPin, AlertCircle } from 'lucide-react'
+import { ArrowRight, Brain, Users, Globe, Lightbulb, AlertTriangle, Target, Network, Microscope, Heart, Mail, MapPin, AlertCircle, Menu, X } from 'lucide-react'
 import costLogo from '/images/logo-white.svg'
 import membersData from './data/members.json'
 
@@ -293,6 +293,7 @@ function Header() {
   )
 
   const [activeSection, setActiveSection] = useState('hero')
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   useEffect(() => {
     const getSectionOffsets = () =>
@@ -332,6 +333,20 @@ function Header() {
     }
   }, [navigation])
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 640) {
+        setIsMenuOpen(false)
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   const linkClasses = (id) =>
     id === activeSection
       ? 'text-blue-600'
@@ -339,19 +354,30 @@ function Header() {
 
   return (
     <header className="sticky top-0 z-40 bg-white bg-opacity-80 backdrop-blur shadow-md">
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <nav className="relative mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <a
           href="#hero"
           onClick={(event) => {
             event.preventDefault()
             smoothScrollTo('hero')
+            setIsMenuOpen(false)
           }}
           className="text-lg font-semibold tracking-[0.3em] text-slate-900"
         >
           DigInMind
         </a>
 
-        <div className="flex items-center gap-8 text-xs font-semibold uppercase tracking-[0.3em] text-slate-600">
+        <button
+          type="button"
+          className="inline-flex items-center justify-center rounded bg-white px-3 py-2 text-slate-700 shadow-sm transition hover:bg-slate-100 sm:hidden"
+          aria-expanded={isMenuOpen}
+          aria-controls="primary-navigation"
+          onClick={() => setIsMenuOpen((previous) => !previous)}
+        >
+          {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
+
+        <div className="hidden items-center gap-8 text-xs font-semibold uppercase tracking-[0.3em] text-slate-600 sm:flex">
           {navigation.map(({ id, label }) => (
             <a
               key={id}
@@ -359,12 +385,37 @@ function Header() {
               onClick={(event) => {
                 event.preventDefault()
                 smoothScrollTo(id)
+                setIsMenuOpen(false)
               }}
               className={`pb-1 transition ${linkClasses(id)}`}
             >
               {label}
             </a>
           ))}
+        </div>
+
+        <div
+          id="primary-navigation"
+          className={`absolute left-0 right-0 top-full bg-white/95 backdrop-blur transition duration-200 sm:hidden ${
+            isMenuOpen ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'
+          }`}
+        >
+          <div className="flex flex-col gap-3 px-4 py-4 text-xs font-semibold uppercase tracking-[0.25em] text-slate-700">
+            {navigation.map(({ id, label }) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                onClick={(event) => {
+                  event.preventDefault()
+                  smoothScrollTo(id)
+                  setIsMenuOpen(false)
+                }}
+                className={`block py-2 transition ${linkClasses(id)}`}
+              >
+                {label}
+              </a>
+            ))}
+          </div>
         </div>
       </nav>
     </header>
@@ -388,7 +439,7 @@ function Footer() {
             <p className="text-xs uppercase tracking-[0.35em] text-slate-300">Quick links</p>
             <ul className="space-y-3 text-sm text-slate-200">
               <li>
-                <a href="https://www.cost.eu" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 border border-white/20 bg-white/10 px-4 py-3 text-white/85 shadow-sm transition hover:bg-white/15">
+                <a href="https://www.cost.eu" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white/10 px-4 py-3 text-white/85 shadow-sm transition hover:bg-white/15">
                   <Globe className="h-4 w-4" />
                   COST Association
                 </a>
@@ -485,7 +536,7 @@ function App() {
   )
 
   // Shared layout utilities keep section spacing and copy styling consistent
-  const containerClasses = 'mx-auto w-full max-w-6xl px-6 sm:px-10 lg:px-12'
+  const containerClasses = 'mx-auto w-full max-w-5xl px-6 sm:px-10 lg:px-12'
   const sectionSpacing = 'py-24'
   const narrativeClasses = 'mt-12 space-y-6 text-lg sm:text-xl leading-relaxed text-slate-700'
   const cardSurface = 'group p-8 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-lg'
@@ -657,7 +708,7 @@ function App() {
               <div className="absolute bottom-[-6rem] left-1/3 h-[24rem] w-[24rem] bg-emerald-400/20 blur-[140px] animate-blob animation-delay-4000" />
               <div className="absolute inset-0 bg-slate-900/80 glow-fade" />
               <div className="absolute inset-x-0 bottom-0 flex justify-center pb-10">
-                <div className="flex items-center gap-4 border border-white/30 bg-white/10 px-6 py-3 shadow-lg backdrop-blur-sm">
+                <div className="flex items-center gap-4 bg-white/10 px-6 py-3 shadow-lg backdrop-blur-sm">
                   <img src={costLogo} alt="COST Association logo" className="h-8 w-auto" />
                   <p className="text-xs font-semibold uppercase tracking-[0.35em] text-white/70">Supported by COST Vision</p>
                 </div>
@@ -675,7 +726,7 @@ function App() {
                   <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
                     <span className="text-blue-300">DigInMind</span>: DIGital INnovation in Mental health for INtervention and Diagnosis
                   </h1>
-                  <p className="mt-6 max-w-2xl text-base sm:text-lg md:text-xl text-white/75">
+                  <p className="mt-6 text-base sm:text-lg md:text-xl text-white/75">
                     We unite clinicians, researchers, and technologists to accelerate ethical, data-driven tools that improve early detection, personalised interventions, and equitable access to mental health support across Europe.
                   </p>
                   <div className="mt-12 grid gap-6 sm:grid-cols-3">
@@ -703,9 +754,9 @@ function App() {
 
           {/* Mission Statement */}
           <section id="mission" className={`bg-white ${sectionSpacing}`}>
-            <div className={`${containerClasses} text-center`}>
+            <div className={`${containerClasses} space-y-8`}>
               <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">Mission Statement</h2>
-              <div className={narrativeClasses}>
+              <div className={`${narrativeClasses} text-left`}>
                 <p>Mental health challenges are rising across Europe, yet early diagnosis and intervention remain limited by resource constraints and diagnostic complexity.</p>
                 <p>DigInMind aims to build a collaborative European network that bridges clinical expertise with cutting-edge technological innovation.</p>
                 <p>By bringing together diverse disciplines, we seek to develop AI-assisted tools for more accurate, accessible, and timely mental health support, ultimately improving outcomes for individuals and communities across the continent.</p>
@@ -715,8 +766,8 @@ function App() {
 
           {/* Main Proponents */}
           <section className={`bg-white ${sectionSpacing}`}>
-            <div className={containerClasses}>
-              <div className="text-center">
+            <div className={`${containerClasses} space-y-8`}>
+              <div className="text-left">
                 <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">Main proponents</h2>
                 <p className="mt-4 text-base text-slate-600">
                   A core group anchors the network with clinical, academic, and technical leadership.
@@ -738,8 +789,8 @@ function App() {
 
           {/* Key Features */}
           <section id="proposal" className={`bg-gradient-to-b from-slate-100 via-white to-slate-100 ${sectionSpacing}`}>
-            <div className={containerClasses}>
-              <div className="text-center">
+            <div className={`${containerClasses} space-y-8`}>
+              <div className="text-left">
                 <p className="text-xs font-semibold uppercase tracking-[0.35em] text-blue-600">Strategic pillars</p>
                 <h2 className="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl">Why DigInMind?</h2>
               </div>
@@ -763,8 +814,8 @@ function App() {
 
           {/* The challenge */}
           <section id="challenge" className={`bg-slate-950 ${sectionSpacing}`}>
-            <div className={`${containerClasses} text-white`}>
-              <div className="text-center">
+            <div className={`${containerClasses} space-y-8 text-white`}>
+              <div className="text-left">
                 <p className="text-xs font-semibold uppercase tracking-[0.35em] text-white/60">Problem framing</p>
                 <h2 className="mt-4 text-3xl font-bold sm:text-4xl">The challenge</h2>
               </div>
@@ -798,8 +849,8 @@ function App() {
 
           {/* Our aim */}
           <section id="aim" className={`bg-white ${sectionSpacing}`}>
-            <div className={containerClasses}>
-              <div className="text-center">
+            <div className={`${containerClasses} space-y-8`}>
+              <div className="text-left">
                 <p className="text-xs font-semibold uppercase tracking-[0.35em] text-blue-600">Our mission</p>
                 <h2 className="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl">Our aim</h2>
               </div>
@@ -827,7 +878,7 @@ function App() {
 
           {/* Impact */}
           <section id="impact" className={`bg-gradient-to-b from-white to-slate-100 ${sectionSpacing}`}>
-            <div className={`${containerClasses} text-center`}>
+            <div className={`${containerClasses} space-y-8 text-left`}>
               <p className="text-xs font-semibold uppercase tracking-[0.35em] text-blue-600">What success unlocks</p>
               <h2 className="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl">Expected outcomes</h2>
 
@@ -849,30 +900,19 @@ function App() {
 
           {/* Be part of the solution */}
           <section id="solution" className={`bg-white ${sectionSpacing}`}>
-            <div className={`${containerClasses} text-center`}>
+            <div className={`${containerClasses} space-y-8 text-left`}>
               <p className="text-xs font-semibold uppercase tracking-[0.35em] text-blue-600">Join the network</p>
               <h2 className="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl">Be part of the solution</h2>
-              <p className="mx-auto mt-8 max-w-2xl text-lg text-slate-700">
+              <p className="mt-8 text-lg text-slate-700">
                 We welcome researchers, clinicians, and professionals who share our vision for transforming mental health care through digital innovation.
               </p>
               <div className="mt-12 flex flex-wrap items-center justify-center gap-6">
                 <a
                   href="mailto:marco.cremaschi@unimib.it?subject=DigInMind - Expression of Interest"
-                  className="inline-flex items-center gap-3 border border-slate-900 bg-slate-900 px-10 py-4 text-sm font-semibold uppercase tracking-[0.3em] text-white shadow-lg transition hover:bg-slate-800"
+                  className="inline-flex items-center gap-3 bg-slate-900 px-10 py-4 text-sm font-semibold uppercase tracking-[0.3em] text-white shadow-lg transition hover:bg-slate-800"
                 >
                   <Mail className="h-6 w-6" />
                   Get in touch
-                </a>
-                <a
-                  href="#vision"
-                  onClick={(event) => {
-                    event.preventDefault()
-                    smoothScrollTo('vision')
-                  }}
-                  className="inline-flex items-center gap-3 border border-slate-500 px-10 py-4 text-sm font-semibold uppercase tracking-[0.3em] text-slate-700 transition hover:border-slate-700 hover:text-slate-900"
-                >
-                  Learn more
-                  <ArrowRight className="h-5 w-5" />
                 </a>
               </div>
             </div>
@@ -880,10 +920,10 @@ function App() {
 
           {/* Our vision */}
           <section id="vision" className={`bg-slate-950 ${sectionSpacing}`}>
-            <div className={`${containerClasses} text-center text-white`}>
+            <div className={`${containerClasses} space-y-8 text-left text-white`}>
               <p className="text-xs font-semibold uppercase tracking-[0.35em] text-white/60">Looking ahead</p>
               <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Our vision</h2>
-              <div className={`${narrativeClasses} mx-auto max-w-3xl text-white/80`}>
+              <div className={`${narrativeClasses} text-left text-white/80`}>
                 <p>Through this COST Action, we envision a future where digital innovation complements human expertise to provide more accurate, accessible, and personalised mental health care. By fostering collaboration across borders and disciplines, DigInMind will contribute to reducing the burden of mental health disorders and improving quality of life for millions of Europeans.</p>
               </div>
             </div>
@@ -891,8 +931,8 @@ function App() {
 
           {/* Network map */}
           <section id="network-map" className={`bg-white ${sectionSpacing}`}>
-            <div className={containerClasses}>
-              <div className="mx-auto max-w-3xl text-center">
+            <div className={`${containerClasses} space-y-8`}>
+              <div className="text-left">
                 <p className="text-xs font-semibold uppercase tracking-[0.35em] text-blue-600">European network</p>
                 <h2 className="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl">Participating countries</h2>
                 <p className="mt-6 text-lg text-slate-600">
@@ -900,8 +940,8 @@ function App() {
                 </p>
               </div>
 
-              <div className="mt-16 grid gap-12 lg:grid-cols-[3fr,minmax(0,2fr)] lg:items-center">
-                <div className="overflow-hidden border border-slate-200 shadow-xl">
+              <div className="mt-16 grid gap-12 lg:grid-cols-2 lg:items-start">
+                <div className="overflow-hidden shadow-xl">
                   <EuropeMap countriesWithMembers={participatingCountries} />
                 </div>
 
@@ -910,7 +950,10 @@ function App() {
                     <p className="text-xs font-semibold uppercase tracking-[0.35em] text-slate-500">Countries represented</p>
                     <ul className="space-y-3 text-sm text-slate-600">
                       {uniqueCountriesWithMembers.map(({ country, count }) => (
-                        <li key={country} className="flex items-center justify-between gap-6 border border-slate-200 bg-slate-50 px-5 py-3">
+                        <li
+                          key={country}
+                          className="flex items-center justify-between gap-6 bg-slate-50 px-5 py-3 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+                        >
                           <span className="font-semibold text-slate-800">{country}</span>
                           <span className="text-xs uppercase tracking-[0.25em] text-blue-600">{count} member{count > 1 ? 's' : ''}</span>
                         </li>
@@ -918,7 +961,7 @@ function App() {
                     </ul>
                   </div>
 
-                  <div className="border border-blue-100 bg-blue-50/80 p-6 text-left shadow-md">
+                  <div className="bg-blue-50/80 p-6 text-left shadow-md">
                     <p className="text-sm text-slate-700">
                       We actively welcome partners from additional countries. Reach out if you would like to collaborate or represent your national community within DigInMind.
                     </p>
