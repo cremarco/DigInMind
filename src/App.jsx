@@ -286,6 +286,7 @@ function Header() {
       { id: 'challenge', label: 'Challenge' },
       { id: 'aim', label: 'Our Aim' },
       { id: 'impact', label: 'Impact' },
+      { id: 'working-groups', label: 'Working Groups' },
       { id: 'solution', label: 'Join Us' },
       { id: 'vision', label: 'Vision' },
     ],
@@ -692,6 +693,117 @@ function App() {
     [],
   )
 
+  const workingGroups = useMemo(
+    () => [
+      {
+        id: 'wg1',
+        name: 'WG1 — Terminology, Standards & Interoperability (AI-ready)',
+        purpose:
+          'Establish the common language and technical foundations so all partners can describe mental-health phenomena and datasets in compatible ways, and AI systems (LLMs/RAG/KGs) can be audited, traced and integrated safely.',
+        streams: [
+          {
+            label: 'A-PSY',
+            description:
+              'Curate a clinically grounded Open Glossary (ICD-11 constructs, symptom clusters, outcomes), define Minimal Clinical Dataset elements and consent language understandable to patients and clinicians.',
+          },
+          {
+            label: 'B-INF',
+            description:
+              'Specify Knowledge-Graph (KG) schema & ontology mappings (ICD-11/SNOMED/etc.), FAIR metadata profiles, and LLM artefact standards (prompt/trace logging, data sheets, model cards, RAG citation fields).',
+          },
+        ],
+        participants: 'Clinical taxonomists, psychometricians, health-informatics and semantic-web engineers, data stewards.',
+        interfaces: 'Other WGs consult the glossary/standards; no joint tasks.',
+        outOfScope: 'Running acquisition studies, building benchmarks, or doing pilots.',
+      },
+      {
+        id: 'wg2',
+        name: 'WG2 — Acquisition Protocols & Cohort Registry (LLM/KG-friendly)',
+        purpose:
+          'Harmonise how data are captured and documented (clinical, psychometric, speech/conversation, paralinguistics), and catalogue existing cohorts/tools so teams can align methods without sharing raw data.',
+        streams: [
+          {
+            label: 'A-PSY',
+            description:
+              'Produce a Protocol Compendium for clinical/psychometric/speech elicitation; define annotation guides (turn-level intents, affect, uncertainty, clinician rationales) with inter-rater procedures.',
+          },
+          {
+            label: 'B-INF',
+            description:
+              'Deliver a Registry Portal & API (cohorts, measures, tools) and a KG Population Playbook to transform registry metadata into a KG (provenance included). No new data collection.',
+          },
+        ],
+        participants: 'Clinicians, speech scientists, annotators, data managers, software engineers.',
+        interfaces: 'WG3 may reference registry metadata to design tasks; WG1 standards are consulted.',
+        outOfScope: 'Conducting clinical pilots.',
+      },
+      {
+        id: 'wg3',
+        name: 'WG3 — Tasks, Metrics & Benchmark Design (AI/LLM focus)',
+        purpose:
+          'Define what good looks like for mental-health AI by specifying reference tasks, metrics (factuality, faithfulness, calibration, bias/fairness, robustness, multilinguality, speech), and baseline suites for LLM/RAG/KG methods.',
+        streams: [
+          {
+            label: 'A-PSY',
+            description:
+              'Specify clinically meaningful tasks (screening, differential triage, longitudinal monitoring), inclusion/exclusion and gold-standard labelling; define fairness constructs and outcome measures.',
+          },
+          {
+            label: 'B-INF',
+            description:
+              'Deliver a Metric Pack & Evaluation Toolkit (docs + test sets), Challenge Rulebook (reproducibility, privacy, safety), and public leaderboards with transparent baselines (where permissible).',
+          },
+        ],
+        participants: 'Clinical methodologists, evaluation scientists, ML/NLP/ASR researchers, benchmark curators.',
+        interfaces: 'May consult WG1/2 documents; publishes reports that others can read.',
+        outOfScope: 'Executing hospital pilots/implementations.',
+      },
+      {
+        id: 'wg4',
+        name: 'WG4 — Implementation Guidelines & Clinical Workflow Integration (AI systems)',
+        purpose:
+          'Turn standards and benchmarks into actionable guidance for safe, usable AI-assisted DSS in emergency departments, primary care and community mental-health centres without building products.',
+        streams: [
+          {
+            label: 'A-PSY',
+            description:
+              'Create UX heuristics for clinicians/patients, cognitive-load and acceptability checklists, safety & escalation pathways (human-in-the-loop).',
+          },
+          {
+            label: 'B-INF',
+            description:
+              'Publish reference architectures (on-prem/edge, hybrid-cloud) for RAG over EHR with KG back-ends, prompt governance & guardrails, monitoring (drift, performance, safety) and auditability.',
+          },
+        ],
+        participants: 'Clinicians with service-design interest, HCI/UX researchers, health-IT architects, MLOps engineers.',
+        interfaces: 'Consumes WG1 standards as inputs on paper; shares guidance that others may read.',
+        outOfScope: 'Defining standards (WG1) or benchmark metrics (WG3); no site deployments/pilots.',
+      },
+      {
+        id: 'wg5',
+        name: 'WG5 — Ethics, Policy, Training & Communication (Responsible AI)',
+        purpose:
+          'Ensure responsible AI across the Action: ethics, legal and social implications; governance models; capacity-building (Training Schools/STSMs) for both communities; clear communication to clinicians, patients and policymakers.',
+        streams: [
+          {
+            label: 'A-PSY',
+            description:
+              'Develop risk scenarios for mental-health AI (consent, stigma, harm mitigation, accessibility), clinician-facing training and patient communication toolkits.',
+          },
+          {
+            label: 'B-INF',
+            description:
+              'Define AI governance & model-risk tiers (documentation, logging, approvals), procurement policy briefs, and technical training on LLM/RAG/KG safety & evaluation.',
+          },
+        ],
+        participants: 'Bioethicists, clinicians, legal scholars, standards liaisons, safety/assurance engineers, science communicators.',
+        interfaces: 'Provides documents and training offers usable by all; no cross-WG tasking.',
+        outOfScope: 'Writing technical standards (WG1), acquisition protocols (WG2), or metric design (WG3).',
+      },
+    ],
+    [],
+  )
+
   return (
     <div className="flex min-h-screen flex-col bg-brand-cloud text-brand-ink">
       <Banner />
@@ -895,6 +1007,59 @@ function App() {
                   </article>
                 ))}
               </div>
+            </div>
+          </section>
+
+          {/* Working groups */}
+          <section id="working-groups" className={`bg-white ${sectionSpacing}`}>
+            <div className={`${containerClasses} space-y-8 text-left`}>
+              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-blue-600">Working structure</p>
+              <h2 className="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl">Working Groups</h2>
+              <p className="text-lg text-slate-700">
+                Five coordinated Working Groups deliver DigInMind outputs through dedicated psychology (A-PSY) and informatics (B-INF) streams, ensuring that every activity pairs informatics and psychological expertise from design through delivery.
+              </p>
+
+              <div className="mt-16 grid grid-cols-1 gap-10">
+                {workingGroups.map(({ id, name, purpose, streams, participants, interfaces, outOfScope }) => (
+                  <article key={id} className={`${cardSurface} bg-slate-50`}>
+                    <div className="space-y-6">
+                      <h3 className="text-xl font-semibold text-slate-900">{name}</h3>
+                      <p className={`${cardBodyStyles} text-slate-600`}>{purpose}</p>
+
+                      <div className="space-y-4">
+                        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">Streams</p>
+                        <ul className="space-y-3 text-sm text-slate-600">
+                          {streams.map((stream) => (
+                            <li key={stream.label} className="bg-white px-4 py-3 shadow-sm">
+                              <p className="font-semibold text-slate-800">{stream.label}</p>
+                              <p className="mt-2 text-slate-600">{stream.description}</p>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="space-y-2 text-sm text-slate-600">
+                        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">Who should join</p>
+                        <p>{participants}</p>
+                      </div>
+
+                      <div className="space-y-2 text-sm text-slate-600">
+                        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">Interfaces</p>
+                        <p>{interfaces}</p>
+                      </div>
+
+                      <div className="space-y-2 text-sm text-slate-600">
+                        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">Out of scope</p>
+                        <p>{outOfScope}</p>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+
+              <p className="text-base text-slate-700">
+                Each Working Group is co-led by one Informatics (INF) and one Psychology/Clinical (PSY) expert. Activities run in two independent streams (A-PSY and B-INF) with self-contained deliverables. Interfaces between WGs are strictly document-based (consultation of published outputs), ensuring stand-alone work while maintaining INF-PSY parity across leadership, outputs and training opportunities.
+              </p>
             </div>
           </section>
 
