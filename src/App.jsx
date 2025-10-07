@@ -700,6 +700,8 @@ function App() {
         name: 'WG1 — Terminology, Standards & Interoperability (AI-ready)',
         purpose:
           'Establish the common language and technical foundations so all partners can describe mental-health phenomena and datasets in compatible ways, and AI systems (LLMs/RAG/KGs) can be audited, traced and integrated safely.',
+        classificationNote:
+          'In psychiatry, multiple classification systems coexist, and experts often disagree on diagnostic boundaries or construct definitions. To ensure conceptual consistency and interoperability, this Action adopts the ICD-11 framework as its primary reference. ICD-11 offers globally standardized terminology, dimensional specifiers aligned with current clinical practice, and digital compatibility that facilitates integration with AI-ready knowledge representations.',
         streams: [
           {
             label: 'A-PSY',
@@ -742,6 +744,8 @@ function App() {
         name: 'WG3 — Tasks, Metrics & Benchmark Design (AI/LLM focus)',
         purpose:
           'Define what good looks like for mental-health AI by specifying reference tasks, metrics (factuality, faithfulness, calibration, bias/fairness, robustness, multilinguality, speech), and baseline suites for LLM/RAG/KG methods.',
+        clinicalReasoningNote:
+          'Map the clinical reasoning chain from patient presentation to diagnosis, from diagnosis to treatment decision, and from intervention to outcome assessment, across three high-pressure settings: emergency departments, general psychiatry outpatient clinics, and primary care. Identify critical points and failure modes in this chain that may compromise diagnostic accuracy or treatment appropriateness. Define current gold standards for diagnostic and therapeutic decision-making, and specify how AI-based systems could support clinicians in improving consistency, timeliness, and quality of care.',
         streams: [
           {
             label: 'A-PSY',
@@ -763,6 +767,8 @@ function App() {
         name: 'WG4 — Implementation Guidelines & Clinical Workflow Integration (AI systems)',
         purpose:
           'Turn standards and benchmarks into actionable guidance for safe, usable AI-assisted DSS in emergency departments, primary care and community mental-health centres without building products.',
+        evaluationNote:
+          'Evaluate whether and how AI-based models developed within the Action effectively enhance clinical performance, by assessing their impact on diagnostic accuracy, decision-making quality, and time efficiency in simulated environments replicating real-world workflows.',
         streams: [
           {
             label: 'A-PSY',
@@ -784,6 +790,8 @@ function App() {
         name: 'WG5 — Ethics, Policy, Training & Communication (Responsible AI)',
         purpose:
           'Ensure responsible AI across the Action: ethics, legal and social implications; governance models; capacity-building (Training Schools/STSMs) for both communities; clear communication to clinicians, patients and policymakers.',
+        responsibleAINote:
+          'Expand responsible-AI activities to include post-deployment monitoring frameworks that assess ethical, clinical, and social impacts over time (“ethics in use”). Strengthen patient involvement through co-creation of communication and training materials, ensuring that AI explainability tools and consent information are accessible, transparent, and sensitive to stigma and cultural diversity.',
         streams: [
           {
             label: 'A-PSY',
@@ -1020,11 +1028,36 @@ function App() {
               </p>
 
               <div className="mt-16 grid grid-cols-1 gap-10">
-                {workingGroups.map(({ id, name, purpose, streams, participants, interfaces, outOfScope }) => (
+                {workingGroups.map(
+                  ({
+                    id,
+                    name,
+                    purpose,
+                    classificationNote,
+                    clinicalReasoningNote,
+                    evaluationNote,
+                    responsibleAINote,
+                    streams,
+                    participants,
+                    interfaces,
+                    outOfScope,
+                  }) => (
                   <article key={id} className={`${cardSurface} bg-slate-50`}>
                     <div className="space-y-6">
                       <h3 className="text-xl font-semibold text-slate-900">{name}</h3>
                       <p className={`${cardBodyStyles} text-slate-600`}>{purpose}</p>
+                      {classificationNote ? (
+                        <p className={`${cardBodyStyles} text-blue-700 bg-blue-50 px-4 py-3`}>{classificationNote}</p>
+                      ) : null}
+                      {clinicalReasoningNote ? (
+                        <p className={`${cardBodyStyles} text-blue-700 bg-blue-50 px-4 py-3`}>{clinicalReasoningNote}</p>
+                      ) : null}
+                      {evaluationNote ? (
+                        <p className={`${cardBodyStyles} text-blue-700 bg-blue-50 px-4 py-3`}>{evaluationNote}</p>
+                      ) : null}
+                      {responsibleAINote ? (
+                        <p className={`${cardBodyStyles} text-blue-700 bg-blue-50 px-4 py-3`}>{responsibleAINote}</p>
+                      ) : null}
 
                       <div className="space-y-4">
                         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">Streams</p>
