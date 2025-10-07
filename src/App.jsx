@@ -540,30 +540,30 @@ function App() {
   const containerClasses = 'mx-auto w-full max-w-5xl px-6 sm:px-10 lg:px-12'
   const sectionSpacing = 'py-24'
   const narrativeClasses = 'mt-12 space-y-6 text-lg sm:text-xl leading-relaxed text-slate-700'
-  const cardSurface = 'group p-8 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-lg'
+  const cardSurface = 'group text-left shadow-sm transition hover:-translate-y-1 hover:shadow-lg'
   const cardLabelStyles = 'flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em]'
   const cardTitleStyles = 'text-lg font-semibold'
   const cardBodyStyles = 'text-sm leading-relaxed'
 
   // Precomputed content collections keep the JSX declarative and readable
   const proponents = useMemo(
-    () => [
-      {
-        name: 'Dr. Marco Cremaschi',
-        institution: 'University of Milano-Bicocca',
-        description: 'Department of Informatics, Systems and Communication (DISCo)',
-      },
-      {
-        name: 'Prof. Antonio Preti',
-        institution: 'University of Torino',
-        description: 'Dipartimento di Neuroscienze "Rita Levi Montalcini"',
-      },
-      {
-        name: 'Dr. Francesco Bevione',
-        institution: 'University of Torino',
-        description: 'Dipartimento di Neuroscienze "Rita Levi Montalcini"',
-      },
-    ],
+    () =>
+      membersData
+        .filter(({ role, show }) =>
+          Boolean(show) && (role === 'Main Proponent' || role === 'Proponent'),
+        )
+        .sort((first, second) => {
+          if (first.role === second.role) {
+            return first.name.localeCompare(second.name)
+          }
+
+          return first.role === 'Main Proponent' ? -1 : 1
+        })
+        .map(({ name, affiliation, department }) => ({
+          name,
+          institution: affiliation,
+          description: department ?? null,
+        })),
     [],
   )
 
@@ -884,22 +884,24 @@ function App() {
             </div>
           </section>
 
-          {/* Main Proponents */}
+          {/* Proponents */}
           <section className={`bg-white ${sectionSpacing}`}>
             <div className={`${containerClasses} space-y-8`}>
               <div className="text-left">
-                <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">Main proponents</h2>
+                <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">Proponents</h2>
                 <p className="mt-4 text-base text-slate-600">
                   A core group anchors the network with clinical, academic, and technical leadership.
                 </p>
               </div>
-              <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {proponents.map((proponent) => (
-                  <article key={proponent.name} className={`${cardSurface} bg-slate-50`}>
-                    <div className="space-y-6">
-                      <h3 className="text-xl font-semibold text-slate-900">{proponent.name}</h3>
-                      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">{proponent.institution}</p>
-                      <p className="text-sm text-slate-600">{proponent.description}</p>
+                  <article key={proponent.name} className={`${cardSurface} bg-slate-50 px-5 py-5 sm:px-4 sm:py-4`}>
+                    <div className="space-y-3">
+                      <h3 className="text-base font-semibold leading-tight text-slate-900">{proponent.name}</h3>
+                      <p className="text-[0.65rem] font-semibold uppercase tracking-[0.28em] leading-relaxed text-slate-500">{proponent.institution}</p>
+                      {proponent.description ? (
+                        <p className="text-xs leading-snug text-slate-600">{proponent.description}</p>
+                      ) : null}
                     </div>
                   </article>
                 ))}

@@ -1,35 +1,82 @@
 [
   {
     "name": "Dr Marco Cremaschi",
-    "country": "Italy"
+    "affiliation": "University of Milano-Bicocca",
+    "department": "Department of Informatics, Systems and Communication (DISCo)",
+    "country": "Italy",
+    "role": "Main Proponent",
+    "show": true
   },
   {
-    "name": "Antonio Preti",
-    "country": "Italy"
+    "name": "Prof Antonio Preti",
+    "affiliation": "University of Torino",
+    "department": "Dipartimento di Neuroscienze \"Rita Levi Montalcini\"",
+    "country": "Italy",
+    "role": "Main Proponent",
+    "show": true
   },
   {
     "name": "Dr Gabriella Casalino",
-    "country": "Italy"
+    "affiliation": "University of Bari",
+    "department": "Department of Informatics",
+    "country": "Italy",
+    "role": "Proponent",
+    "show": true
   },
   {
-    "name": "Francesco Bevione",
-    "country": "Italy"
+    "name": "Dr Francesco Bevione",
+    "affiliation": "University of Torino",
+    "department": "Dipartimento di Neuroscienze \"Rita Levi Montalcini\"",
+    "country": "Italy",
+    "role": "Main Proponent",
+    "show": true
   },
   {
-    "name": "Anna Panzeri",
-    "country": "Italy"
+    "name": "Prof Andrea Maurino",
+    "affiliation": "University of Milano-Bicocca",
+    "department": "Department of Informatics, Systems and Communication (DISCo)",
+    "country": "Italy",
+    "role": "Main Proponent",
+    "show": true
   },
   {
-    "name": "Erika Fanti",
-    "country": "Italy"
+    "name": "Dr Anna Panzeri",
+    "affiliation": "University of Padua",
+    "department": "Department of General Psychology",
+    "country": "Italy",
+    "role": "Proponent",
+    "show": true
   },
   {
-    "name": "Dr Charlotte Blease",
-    "country": "Sweden"
+    "name": "Dr Erika Fanti",
+    "affiliation": "University of Milano-Bicocca",
+    "department": "Department of Psychology",
+    "country": "Italy",
+    "role": "Proponent",
+    "show": true
   },
   {
-    "name": "Katarzyna Kaczmarek-Majer",
-    "country": "Poland"
+    "name": "Prof Charlotte Blease",
+    "affiliation": "Uppsala University",
+    "department": "Department of Women's and Children's Health",
+    "country": "Sweden",
+    "role": "Proponent",
+    "show": true
+  },
+  {
+    "name": "Prof Katarzyna Kaczmarek-Majer",
+    "affiliation": "Polish Academy of Sciences",
+    "department": "Department of Stochastic Methods",
+    "country": "Poland",
+    "role": "Proponent",
+    "show": true
+  },
+  {
+    "name": "Prof Philippe Mortier",
+    "affiliation": "Hospital del Mar Research Institute",
+    "country": "Spain",
+    "role": "Proponent",
+    "show": false
   }
 ]
 
