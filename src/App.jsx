@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { geoPath, geoMercator, geoCentroid, geoBounds } from 'd3'
 import { feature } from 'topojson-client'
 import countriesTopology from 'world-atlas/countries-110m.json'
-import { ArrowRight, Brain, Users, Globe, Lightbulb, AlertTriangle, Target, Network, Microscope, Heart, Mail, MapPin, AlertCircle, Menu, X } from 'lucide-react'
+import { ArrowRight, ArrowDown, Brain, Users, Globe, Lightbulb, AlertTriangle, Target, Network, Microscope, Heart, Mail, MapPin, AlertCircle, Menu, X } from 'lucide-react'
 import costLogo from '/images/logo-white.svg'
 import membersData from './data/members.json'
 
@@ -71,6 +71,22 @@ const EUROPE_BOUNDARY = {
   minLongitude: -25,
   maxLongitude: 45,
 }
+
+const bannerAnimationStyles = `
+  @keyframes banner-marquee {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .banner-marquee {
+    animation: banner-marquee 28s linear infinite;
+    will-change: transform;
+  }
+`
 
 function EuropeMap({ countriesWithMembers }) {
   const { countries, matchedParticipants } = useMemo(() => {
@@ -265,12 +281,15 @@ function AnimatedStat({ value, suffix = '', label, duration = 1400 }) {
 // Banner component for proposal status context
 function Banner() {
   return (
-    <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 text-white text-opacity-80">
-      <div className="mx-auto flex max-w-7xl items-center justify-center gap-3 px-4 py-3 text-xs font-medium uppercase tracking-[0.35em]">
-        <AlertCircle className="h-4 w-4 flex-shrink-0 text-white text-opacity-60" />
-        <p className="text-center">
-          This website presents a COST Action proposal currently under preparation. The network is not yet approved.
-        </p>
+    <div className="bg-gradient-to-r from-blue-950 via-indigo-900 to-blue-950 text-white text-opacity-85 overflow-hidden">
+      <style>{bannerAnimationStyles}</style>
+      <div className="mx-auto max-w-7xl overflow-hidden px-4 py-3">
+        <div className="banner-marquee flex items-center justify-center gap-3 text-xs font-medium uppercase tracking-[0.35em]">
+          <AlertCircle className="h-4 w-4 flex-shrink-0 text-white text-opacity-60" />
+          <p className="text-center whitespace-nowrap">
+            This website presents a COST Action proposal currently under preparation. The network is not yet approved.
+          </p>
+        </div>
       </div>
     </div>
   )
@@ -354,7 +373,7 @@ function Header() {
       : 'text-slate-500 hover:text-slate-900'
 
   return (
-    <header className="sticky top-0 z-40 bg-white bg-opacity-80 backdrop-blur shadow-md">
+    <header className="relative z-40 bg-white bg-opacity-80 backdrop-blur shadow-md">
       <nav className="relative mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <a
           href="#hero"
@@ -541,6 +560,8 @@ function App() {
   const sectionSpacing = 'py-24'
   const narrativeClasses = 'mt-12 space-y-6 text-lg sm:text-xl leading-relaxed text-slate-700'
   const cardSurface = 'group text-left shadow-sm transition hover:-translate-y-1 hover:shadow-lg'
+  const cardPadding = 'p-8 sm:p-10'
+  const cardInnerSpacing = 'space-y-6'
   const cardLabelStyles = 'flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em]'
   const cardTitleStyles = 'text-lg font-semibold'
   const cardBodyStyles = 'text-sm leading-relaxed'
@@ -814,8 +835,10 @@ function App() {
 
   return (
     <div className="flex min-h-screen flex-col bg-brand-cloud text-brand-ink">
-      <Banner />
-      <Header />
+      <div className="sticky top-0 z-50">
+        <Banner />
+        <Header />
+      </div>
       <main className="flex-grow">
         <div>
           <style>{heroAnimationStyles}</style>
@@ -827,45 +850,50 @@ function App() {
               <div className="absolute top-1/3 -right-32 h-[26rem] w-[26rem] bg-blue-500/25 blur-[150px] animate-blob-alt animation-delay-2000" />
               <div className="absolute bottom-[-6rem] left-1/3 h-[24rem] w-[24rem] bg-emerald-400/20 blur-[140px] animate-blob animation-delay-4000" />
               <div className="absolute inset-0 bg-slate-900/80 glow-fade" />
-              <div className="absolute inset-x-0 bottom-0 flex justify-center pb-10">
-                <div className="flex items-center gap-4 bg-white/10 px-6 py-3 shadow-lg backdrop-blur-sm">
-                  <img src={costLogo} alt="COST Association logo" className="h-8 w-auto" />
-                  <p className="text-xs font-semibold uppercase tracking-[0.35em] text-white/70">Supported by COST Vision</p>
-                </div>
-              </div>
             </div>
 
             <div className={`${containerClasses} relative`}>
-              <div className="grid gap-16">
-                <div className="text-white">
+              <div className="space-y-12">
+                {/* Titolo esteso allineato a sinistra */}
+                <div>
                   <div className="mb-8 flex items-center gap-4 text-xs font-semibold uppercase tracking-[0.35em] text-white/60">
                     <span className="h-px flex-1 bg-white/35" />
                     <span>COST Action Proposal</span>
                     <span className="h-px flex-1 bg-white/35" />
                   </div>
-                  <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white text-left">
                     <span className="text-blue-300">DigInMind</span>: DIGital INnovation in Mental health for INtervention and Diagnosis
                   </h1>
-                  <p className="mt-6 text-base sm:text-lg md:text-xl text-white/75">
-                    We unite clinicians, researchers, and technologists to accelerate ethical, data-driven tools that improve early detection, personalised interventions, and equitable access to mental health support across Europe.
-                  </p>
-                  <div className="mt-12 grid gap-6 sm:grid-cols-3">
-                    {stats.map((stat) => (
-                      <AnimatedStat key={stat.label} value={stat.value} suffix={stat.suffix} label={stat.label} />
-                    ))}
+                </div>
+
+                {/* Due colonne: descrizione e metriche a sinistra, logo a destra */}
+                <div className="grid gap-12 lg:grid-cols-[1fr_auto] lg:items-start">
+                  <div className="space-y-8">
+                    <p className="text-base sm:text-lg md:text-xl text-white/75 text-left">
+                      We unite clinicians, researchers, and technologists to accelerate ethical, data-driven tools that improve early detection, personalised interventions, and equitable access to mental health support across Europe.
+                    </p>
+                    <div className="grid gap-6 sm:grid-cols-3">
+                      {stats.map((stat) => (
+                        <AnimatedStat key={stat.label} value={stat.value} suffix={stat.suffix} label={stat.label} />
+                      ))}
+                    </div>
+                    <div className="flex">
+                      <a
+                        href="#proposal"
+                        onClick={(event) => {
+                          event.preventDefault()
+                          smoothScrollTo('proposal')
+                        }}
+                        className="inline-flex items-center gap-3 bg-white px-8 py-3 text-base font-semibold uppercase tracking-[0.2em] text-slate-900 shadow-lg transition hover:bg-slate-100"
+                      >
+                        Explore the proposal
+                        <ArrowDown className="h-5 w-5" />
+                      </a>
+                    </div>
                   </div>
-                  <div className="mt-10 flex flex-wrap gap-4">
-                    <a
-                      href="#proposal"
-                      onClick={(event) => {
-                        event.preventDefault()
-                        smoothScrollTo('proposal')
-                      }}
-                      className="inline-flex items-center gap-3 bg-white px-8 py-3 text-base font-semibold uppercase tracking-[0.2em] text-slate-900 shadow-lg transition hover:bg-slate-100"
-                    >
-                      Explore the proposal
-                      <ArrowRight className="h-5 w-5" />
-                    </a>
+                  
+                  <div className="flex justify-center lg:justify-end">
+                    <img src={costLogo} alt="COST Association logo" className="h-24 w-auto" />
                   </div>
                 </div>
               </div>
@@ -919,8 +947,8 @@ function App() {
 
               <div className="mt-16 grid gap-8 sm:grid-cols-2 xl:grid-cols-4">
                 {featureCards.map(({ icon: Icon, iconColor, label, title, body }) => (
-                  <article key={title} className={`${cardSurface} bg-slate-50`}>
-                    <div className="space-y-6">
+                  <article key={title} className={`${cardSurface} bg-slate-50 ${cardPadding}`}>
+                    <div className={cardInnerSpacing}>
                       <div className={`${cardLabelStyles} text-slate-500`}>
                         <Icon className={`h-5 w-5 ${iconColor}`} />
                         <span className="text-slate-500">{label}</span>
@@ -950,9 +978,9 @@ function App() {
                   {challengeCards.map(({ icon: Icon, iconColor, label, title, body }) => (
                     <article
                       key={title}
-                      className="group bg-white/5 p-8 text-left shadow-lg backdrop-blur transition hover:-translate-y-1 hover:bg-white/10"
+                      className={`${cardSurface} ${cardPadding} bg-white/5 text-white/80 shadow-lg backdrop-blur hover:bg-white/10`}
                     >
-                      <div className="space-y-6">
+                      <div className={cardInnerSpacing}>
                         <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-white/60">
                           <Icon className={`h-5 w-5 ${iconColor}`} />
                           <span className="text-white/70">{label}</span>
@@ -982,14 +1010,14 @@ function App() {
 
                 <div className="mt-14 grid gap-10 lg:grid-cols-2">
                   {aimPillars.map(({ icon: Icon, iconColor, label, title, body }) => (
-                    <article key={title} className={`${cardSurface} bg-slate-50`}>
-                      <div className="space-y-6">
-                      <div className={`${cardLabelStyles} text-slate-500`}>
-                        <Icon className={`h-5 w-5 ${iconColor}`} />
-                        <span className="text-slate-500">{label}</span>
+                    <article key={title} className={`${cardSurface} bg-slate-50 ${cardPadding}`}>
+                      <div className={cardInnerSpacing}>
+                        <div className={`${cardLabelStyles} text-slate-500`}>
+                          <Icon className={`h-5 w-5 ${iconColor}`} />
+                          <span className="text-slate-500">{label}</span>
                         </div>
-                      <h3 className={`${cardTitleStyles} text-slate-900`}>{title}</h3>
-                      <p className={`${cardBodyStyles} text-slate-600`}>{body}</p>
+                        <h3 className={`${cardTitleStyles} text-slate-900`}>{title}</h3>
+                        <p className={`${cardBodyStyles} text-slate-600`}>{body}</p>
                       </div>
                     </article>
                   ))}
@@ -1006,11 +1034,8 @@ function App() {
 
               <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                 {outcomeHighlights.map(({ icon: Icon, iconColor, title }) => (
-                  <article
-                    key={title}
-                    className={`${cardSurface} bg-slate-50 p-6`}
-                  >
-                    <div className="space-y-6">
+                  <article key={title} className={`${cardSurface} bg-slate-50 ${cardPadding}`}>
+                    <div className={cardInnerSpacing}>
                       <Icon className={`h-6 w-6 ${iconColor}`} />
                       <p className="text-sm text-slate-600">{title}</p>
                     </div>
@@ -1044,8 +1069,8 @@ function App() {
                     interfaces,
                     outOfScope,
                   }) => (
-                  <article key={id} className={`${cardSurface} bg-slate-50`}>
-                    <div className="space-y-6">
+                  <article key={id} className={`${cardSurface} bg-slate-50 ${cardPadding}`}>
+                    <div className={cardInnerSpacing}>
                       <h3 className="text-xl font-semibold text-slate-900">{name}</h3>
                       <p className={`${cardBodyStyles} text-slate-600`}>{purpose}</p>
                       {classificationNote ? (
