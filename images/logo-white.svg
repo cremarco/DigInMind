@@ -3,14 +3,8 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 1366 564" style="enable-background:new 0 0 1366 564;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:url(#logoGradient);}
+	.st0{fill:#f1f5f9;}
 </style>
-<defs>
-	<linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-		<stop offset="0%" stop-color="#38BDF8" />
-		<stop offset="100%" stop-color="#1D4ED8" />
-	</linearGradient>
-</defs>
 <path class="st0" d="M395.9,407.7L395.9,407.7l0.1,0.1L395.9,407.7z M394.6,406.1l0.1,0.1L394.6,406.1z M393.2,402.1v0.2V402.1z
 	 M393.2,365.6v0.2V365.6z M395.9,360.1L395.9,360.1L395.9,360.1L395.9,360.1z M403.7,399.4l-0.1-0.2L403.7,399.4z M404.2,400.1
 	l-0.1-0.1L404.2,400.1z M428.1,409.2v-8.3h-20.4h-0.1c-1,0-2.1,0-2.9-0.5l-0.6-0.5l-0.1-0.1l-0.4-0.6V399l-0.3-1.9v-8.2l21.6-0.7
