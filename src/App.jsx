@@ -10,9 +10,11 @@ const MAP_WIDTH = 760
 const MAP_HEIGHT = 520
 
 const COUNTRY_NAME_NORMALISERS = new Map([
-  ['Macedonia', 'North Macedonia'],
   ['Bosnia and Herz.', 'Bosnia and Herzegovina'],
   ['Czechia', 'Czech Republic'],
+  ['Macedonia', 'Republic of North Macedonia'],
+  ['Moldova', 'Republic of Moldova'],
+  ['Turkey', 'Türkiye'],
 ])
 
 const getDisplayCountryName = (name) => COUNTRY_NAME_NORMALISERS.get(name) ?? name
@@ -21,8 +23,6 @@ const EUROPEAN_COUNTRY_NAMES = new Set([
   'Albania',
   'Armenia',
   'Austria',
-  'Azerbaijan',
-  'Belarus',
   'Belgium',
   'Bosnia and Herz.',
   'Bulgaria',
@@ -40,7 +40,6 @@ const EUROPEAN_COUNTRY_NAMES = new Set([
   'Iceland',
   'Ireland',
   'Italy',
-  'Kosovo',
   'Latvia',
   'Lithuania',
   'Luxembourg',
@@ -53,7 +52,6 @@ const EUROPEAN_COUNTRY_NAMES = new Set([
   'Poland',
   'Portugal',
   'Romania',
-  'Russia',
   'Serbia',
   'Slovakia',
   'Slovenia',
