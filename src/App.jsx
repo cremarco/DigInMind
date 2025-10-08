@@ -174,8 +174,8 @@ function EuropeMap({ countriesWithMembers }) {
     >
       <defs>
         <linearGradient id="europe-map-background" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#0f172a" stopOpacity="0.95" />
-          <stop offset="100%" stopColor="#1e293b" stopOpacity="0.9" />
+          <stop offset="0%" stopColor="#020617" stopOpacity="0.95" />
+          <stop offset="100%" stopColor="#0f172a" stopOpacity="0.9" />
         </linearGradient>
       </defs>
 
@@ -196,10 +196,10 @@ function EuropeMap({ countriesWithMembers }) {
           <path
             key={countryName}
             d={path}
-            fill={isHighlighted ? '#2563eb' : '#64748b'}
+            fill={isHighlighted ? '#3b82f6' : '#64748b'}
             fillOpacity={isHighlighted ? 0.9 : 0.45}
-            stroke="#0f172a"
-            strokeOpacity={0.5}
+            stroke="#f1f5f9"
+            strokeOpacity={0.3}
             strokeWidth={0.6}
           >
             <title>{label}</title>
@@ -207,20 +207,6 @@ function EuropeMap({ countriesWithMembers }) {
         )
       })}
 
-      {markers.map((marker) => (
-        <g key={marker.name} className="pointer-events-none">
-          <circle
-            cx={marker.coordinates[0]}
-            cy={marker.coordinates[1]}
-            r={6}
-            fill="#38bdf8"
-            stroke="#0f172a"
-            strokeWidth={1.4}
-          >
-            <title>{getDisplayCountryName(marker.name)}</title>
-          </circle>
-        </g>
-      ))}
     </svg>
   )
 }
@@ -862,7 +848,7 @@ function App() {
                     <span className="h-px flex-1 bg-white/35" />
                   </div>
                   <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white text-left">
-                    <span className="text-blue-300">DigInMind</span>: DIGital INnovation in Mental health for INtervention and Diagnosis
+                    <span className="text-amber-400">DigInMind</span>: DIGital INnovation in Mental health for INtervention and Diagnosis
                   </h1>
                 </div>
 
@@ -1134,7 +1120,7 @@ function App() {
               <div className="mt-12 flex flex-wrap items-center justify-center gap-6">
                 <a
                   href="mailto:marco.cremaschi@unimib.it?subject=DigInMind - Expression of Interest"
-                  className="inline-flex items-center gap-3 bg-slate-900 px-10 py-4 text-sm font-semibold uppercase tracking-[0.3em] text-white shadow-lg transition hover:bg-slate-800"
+                  className="inline-flex items-center gap-3 bg-amber-400 px-10 py-4 text-sm font-semibold uppercase tracking-[0.3em] text-slate-900 shadow-lg transition hover:bg-amber-500"
                 >
                   <Mail className="h-6 w-6" />
                   Get in touch
