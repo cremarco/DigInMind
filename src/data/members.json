@@ -49,8 +49,8 @@
   },
   {
     "name": "Dr Erika Fanti",
-    "affiliation": "University of Milano-Bicocca",
-    "department": "Department of Psychology",
+    "affiliation": "University of Padua",
+    "department": "Department of General Psychology",
     "country": "Italy",
     "role": "Proponent",
     "show": true
@@ -77,6 +77,12 @@
     "country": "Spain",
     "role": "Proponent",
     "show": true
+  },
+  {
+    "name": "Dr Sylvie Bernaerts",
+    "affiliation": "Thomas More University of Applied Sciences",
+    "country": "Belgium",
+    "role": "Proponent",
+    "show": true
   }
 ]
-
