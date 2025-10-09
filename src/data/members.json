@@ -84,5 +84,13 @@
     "country": "Belgium",
     "role": "Proponent",
     "show": true
+  },
+  {
+    "name": "Prof Andrea Raballo",
+    "affiliation": "Univsersità della Svizzera Italiana",
+    "department": "Faculty of Biomedical Sciences",
+    "country": "Switzerland",
+    "role": "Proponent",
+    "show": true
   }
 ]
