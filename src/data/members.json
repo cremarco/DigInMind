@@ -1,6 +1,8 @@
 [
   {
-    "name": "Dr Marco Cremaschi",
+    "title": "Dr",
+    "name": "Marco",
+    "surname": "Cremaschi",
     "affiliation": "University of Milano-Bicocca",
     "department": "Department of Informatics, Systems and Communication (DISCo)",
     "country": "Italy",
@@ -8,15 +10,19 @@
     "show": true
   },
   {
-    "name": "Prof Antonio Preti",
+    "title": "Prof",
+    "name": "Antonio",
+    "surname": "Preti",
     "affiliation": "University of Torino",
-    "department": "Dipartimento di Neuroscienze \"Rita Levi Montalcini\"",
+    "department": "Dipartiment of Neuroscience \"Rita Levi Montalcini\"",
     "country": "Italy",
     "role": "Main Proponent",
     "show": true
   },
   {
-    "name": "Dr Gabriella Casalino",
+    "title": "Dr",
+    "name": "Gabriella",
+    "surname": "Casalino",
     "affiliation": "University of Bari",
     "department": "Department of Informatics",
     "country": "Italy",
@@ -24,15 +30,19 @@
     "show": true
   },
   {
-    "name": "Dr Francesco Bevione",
+    "title": "Dr",
+    "name": "Francesco",
+    "surname": "Bevione",
     "affiliation": "University of Torino",
-    "department": "Dipartimento di Neuroscienze \"Rita Levi Montalcini\"",
+    "department": "Dipartiment of Neuroscience \"Rita Levi Montalcini\"",
     "country": "Italy",
     "role": "Main Proponent",
     "show": true
   },
   {
-    "name": "Prof Andrea Maurino",
+    "title": "Prof",
+    "name": "Andrea",
+    "surname": "Maurino",
     "affiliation": "University of Milano-Bicocca",
     "department": "Department of Informatics, Systems and Communication (DISCo)",
     "country": "Italy",
@@ -40,7 +50,9 @@
     "show": true
   },
   {
-    "name": "Dr Anna Panzeri",
+    "title": "Dr",
+    "name": "Anna",
+    "surname": "Panzeri",
     "affiliation": "University of Padua",
     "department": "Department of General Psychology",
     "country": "Italy",
@@ -48,7 +60,9 @@
     "show": true
   },
   {
-    "name": "Dr Erika Fanti",
+    "title": "Dr",
+    "name": "Erika",
+    "surname": "Fanti",
     "affiliation": "University of Padua",
     "department": "Department of General Psychology",
     "country": "Italy",
@@ -56,7 +70,9 @@
     "show": true
   },
   {
-    "name": "Prof Charlotte Blease",
+    "title": "Prof",
+    "name": "Charlotte",
+    "surname": "Blease",
     "affiliation": "Uppsala University",
     "department": "Department of Women's and Children's Health",
     "country": "Sweden",
@@ -64,7 +80,9 @@
     "show": true
   },
   {
-    "name": "Prof Katarzyna Kaczmarek-Majer",
+    "title": "Prof",
+    "name": "Katarzyna",
+    "surname": "Kaczmarek-Majer",
     "affiliation": "Polish Academy of Sciences",
     "department": "Department of Stochastic Methods",
     "country": "Poland",
@@ -72,21 +90,27 @@
     "show": true
   },
   {
-    "name": "Prof Philippe Mortier",
+    "title": "Dr",
+    "name": "Philippe",
+    "surname": "Mortier",
     "affiliation": "Hospital del Mar Research Institute",
     "country": "Spain",
     "role": "Proponent",
     "show": true
   },
   {
-    "name": "Dr Sylvie Bernaerts",
+    "title": "Dr",
+    "name": "Sylvie",
+    "surname": "Bernaerts",
     "affiliation": "Thomas More University of Applied Sciences",
     "country": "Belgium",
     "role": "Proponent",
     "show": true
   },
   {
-    "name": "Prof Andrea Raballo",
+    "title": "Prof",
+    "name": "Andrea",
+    "surname": "Raballo",
     "affiliation": "Univsersità della Svizzera Italiana",
     "department": "Faculty of Biomedical Sciences",
     "country": "Switzerland",

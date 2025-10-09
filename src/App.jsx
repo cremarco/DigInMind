@@ -19,6 +19,9 @@ const COUNTRY_NAME_NORMALISERS = new Map([
 
 const getDisplayCountryName = (name) => COUNTRY_NAME_NORMALISERS.get(name) ?? name
 
+const getMemberFullName = ({ title, name, surname }) =>
+  [title, name, surname].filter(Boolean).join(' ')
+
 const EUROPEAN_COUNTRY_NAMES = new Set([
   'Albania',
   'Armenia',
@@ -559,13 +562,21 @@ function App() {
         )
         .sort((first, second) => {
           if (first.role === second.role) {
+            const surnameComparison = first.surname.localeCompare(second.surname)
+            if (surnameComparison !== 0) {
+              return surnameComparison
+            }
+
             return first.name.localeCompare(second.name)
           }
 
           return first.role === 'Main Proponent' ? -1 : 1
         })
-        .map(({ name, affiliation, department }) => ({
-          name,
+        .map(({ title, name, surname, affiliation, department }) => ({
+          title,
+          givenName: name,
+          surname,
+          fullName: getMemberFullName({ title, name, surname }),
           institution: affiliation,
           description: department ?? null,
         })),
@@ -907,9 +918,11 @@ function App() {
               </div>
               <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {proponents.map((proponent) => (
-                  <article key={proponent.name} className={`${cardSurface} bg-slate-50 px-5 py-5 sm:px-4 sm:py-4`}>
+                  <article key={proponent.fullName} className={`${cardSurface} bg-slate-50 px-5 py-5 sm:px-4 sm:py-4`}>
                     <div className="space-y-3">
-                      <h3 className="text-base font-semibold leading-tight text-slate-900">{proponent.name}</h3>
+                      <h3 className="text-base font-semibold leading-tight text-slate-900">
+                        {proponent.fullName}
+                      </h3>
                       <p className="text-[0.65rem] font-semibold uppercase tracking-[0.28em] leading-relaxed text-slate-500">{proponent.institution}</p>
                       {proponent.description ? (
                         <p className="text-xs leading-snug text-slate-600">{proponent.description}</p>
