@@ -17,10 +17,73 @@ const COUNTRY_NAME_NORMALISERS = new Map([
   ['Turkey', 'Türkiye'],
 ])
 
+const COUNTRY_FLAG_CODES = new Map([
+  ['Albania', 'al'],
+  ['Andorra', 'ad'],
+  ['Armenia', 'am'],
+  ['Austria', 'at'],
+  ['Belgium', 'be'],
+  ['Bosnia and Herzegovina', 'ba'],
+  ['Bulgaria', 'bg'],
+  ['Croatia', 'hr'],
+  ['Cyprus', 'cy'],
+  ['Czech Republic', 'cz'],
+  ['Denmark', 'dk'],
+  ['Estonia', 'ee'],
+  ['Finland', 'fi'],
+  ['France', 'fr'],
+  ['Georgia', 'ge'],
+  ['Germany', 'de'],
+  ['Greece', 'gr'],
+  ['Hungary', 'hu'],
+  ['Iceland', 'is'],
+  ['Ireland', 'ie'],
+  ['Italy', 'it'],
+  ['Latvia', 'lv'],
+  ['Liechtenstein', 'li'],
+  ['Lithuania', 'lt'],
+  ['Luxembourg', 'lu'],
+  ['Malta', 'mt'],
+  ['Republic of Moldova', 'md'],
+  ['Republic of North Macedonia', 'mk'],
+  ['Monaco', 'mc'],
+  ['Montenegro', 'me'],
+  ['Netherlands', 'nl'],
+  ['Norway', 'no'],
+  ['Poland', 'pl'],
+  ['Portugal', 'pt'],
+  ['Romania', 'ro'],
+  ['San Marino', 'sm'],
+  ['Serbia', 'rs'],
+  ['Slovakia', 'sk'],
+  ['Slovenia', 'si'],
+  ['Spain', 'es'],
+  ['Sweden', 'se'],
+  ['Switzerland', 'ch'],
+  ['Türkiye', 'tr'],
+  ['Ukraine', 'ua'],
+  ['United Kingdom', 'gb'],
+  ['Vatican City', 'va'],
+  ['Bosnia and Herz.', 'ba'],
+  ['Czechia', 'cz'],
+  ['Macedonia', 'mk'],
+  ['Moldova', 'md'],
+  ['Turkey', 'tr'],
+])
+
 const getDisplayCountryName = (name) => COUNTRY_NAME_NORMALISERS.get(name) ?? name
 
 const getMemberFullName = ({ title, name, surname }) =>
   [title, name, surname].filter(Boolean).join(' ')
+
+const getCountryFlagCode = (name) => {
+  if (!name) {
+    return null
+  }
+
+  const normalisedName = getDisplayCountryName(name)
+  return COUNTRY_FLAG_CODES.get(normalisedName) ?? COUNTRY_FLAG_CODES.get(name) ?? null
+}
 
 const EUROPEAN_COUNTRY_NAMES = new Set([
   'Albania',
@@ -572,13 +635,15 @@ function App() {
 
           return first.role === 'Main Proponent' ? -1 : 1
         })
-        .map(({ title, name, surname, affiliation, department }) => ({
+        .map(({ title, name, surname, affiliation, department, country }) => ({
           title,
           givenName: name,
           surname,
           fullName: getMemberFullName({ title, name, surname }),
           institution: affiliation,
           description: department ?? null,
+          country,
+          countryFlagCode: getCountryFlagCode(country),
         })),
     [],
   )
@@ -918,7 +983,15 @@ function App() {
               </div>
               <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {proponents.map((proponent) => (
-                  <article key={proponent.fullName} className={`${cardSurface} bg-slate-50 px-5 py-5 sm:px-4 sm:py-4`}>
+                  <article key={proponent.fullName} className={`relative ${cardSurface} bg-slate-50 px-5 py-5 sm:px-4 sm:py-4`}>
+                    {proponent.countryFlagCode ? (
+                      <img
+                        src={`https://flagcdn.com/${proponent.countryFlagCode}.svg`}
+                        alt={`Flag of ${proponent.country}`}
+                        className="absolute right-4 top-4 h-5 w-8 rounded-sm border border-white shadow-sm object-cover transform origin-top-right rotate-45 translate-x-[8px]"
+                        loading="lazy"
+                      />
+                    ) : null}
                     <div className="space-y-3">
                       <h3 className="text-base font-semibold leading-tight text-slate-900">
                         {proponent.fullName}
