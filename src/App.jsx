@@ -136,6 +136,352 @@ const EUROPE_BOUNDARY = {
   maxLongitude: 45,
 }
 
+const navigationLinks = [
+  { id: 'hero', label: 'Home' },
+  { id: 'mission', label: 'Mission' },
+  { id: 'proposal', label: 'Proposal' },
+  { id: 'challenge', label: 'Challenge' },
+  { id: 'aim', label: 'Our Aim' },
+  { id: 'impact', label: 'Impact' },
+  { id: 'working-groups', label: 'Working Groups' },
+  { id: 'solution', label: 'Join Us' },
+  { id: 'vision', label: 'Vision' },
+]
+
+const heroAnimationStyles = `
+  @keyframes blob {
+    0%, 100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    33% {
+      transform: translate3d(35px, -25px, 0) scale(1.05);
+    }
+    66% {
+      transform: translate3d(-25px, 30px, 0) scale(0.95);
+    }
+  }
+
+  @keyframes slowfade {
+    0%, 100% {
+      opacity: 0.55;
+    }
+    50% {
+      opacity: 0.9;
+    }
+  }
+
+  .animate-blob {
+    animation: blob 22s ease-in-out infinite;
+  }
+
+  .animate-blob-alt {
+    animation: blob 28s ease-in-out infinite;
+  }
+
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+
+  .glow-fade {
+    animation: slowfade 16s ease-in-out infinite;
+  }
+`
+
+const containerClasses = 'mx-auto w-full max-w-5xl px-6 sm:px-10 lg:px-12'
+const sectionSpacing = 'py-24'
+const narrativeClasses = 'mt-12 space-y-6 text-lg sm:text-xl leading-relaxed text-slate-700'
+const cardSurface = 'group text-left shadow-sm transition hover:-translate-y-1 hover:shadow-lg'
+const cardPadding = 'p-8 sm:p-10'
+const cardInnerSpacing = 'space-y-6'
+const cardLabelStyles = 'flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em]'
+const cardTitleStyles = 'text-lg font-semibold'
+const cardBodyStyles = 'text-sm leading-relaxed'
+
+const featureCards = [
+  {
+    icon: Brain,
+    iconColor: 'text-brand-cerulean',
+    label: 'Innovation pillar',
+    title: 'AI-assisted innovation',
+    body: 'Leveraging artificial intelligence for enhanced diagnostic accuracy and early intervention.',
+  },
+  {
+    icon: Users,
+    iconColor: 'text-teal-500',
+    label: 'Network pillar',
+    title: 'Interdisciplinary network',
+    body: 'Connecting psychologists, clinicians, and computer scientists across disciplines.',
+  },
+  {
+    icon: Globe,
+    iconColor: 'text-indigo-500',
+    label: 'Reach pillar',
+    title: 'Pan-European reach',
+    body: 'Building collaboration across European countries and research institutions.',
+  },
+  {
+    icon: Lightbulb,
+    iconColor: 'text-amber-500',
+    label: 'Impact pillar',
+    title: 'Accessible solutions',
+    body: 'Developing tools to make mental health support more accessible to all communities.',
+  },
+]
+
+const challengeCards = [
+  {
+    icon: AlertTriangle,
+    iconColor: 'text-brand-cerulean',
+    label: 'Barrier',
+    title: 'Early diagnosis difficulties',
+    body: 'Mental health conditions often go undetected until they reach advanced stages, missing crucial windows for early intervention and prevention.',
+  },
+  {
+    icon: Microscope,
+    iconColor: 'text-indigo-400',
+    label: 'Barrier',
+    title: 'Symptom variability',
+    body: 'Mental health symptoms manifest differently across individuals, cultures, and contexts, making standardised diagnosis challenging.',
+  },
+  {
+    icon: MapPin,
+    iconColor: 'text-emerald-500',
+    label: 'Barrier',
+    title: 'Access barriers',
+    body: 'Limited resources, geographic disparities, and stigma create significant obstacles to accessing timely mental health support and treatment.',
+  },
+]
+
+const aimPillars = [
+  {
+    icon: Network,
+    iconColor: 'text-brand-cerulean',
+    label: 'Interdisciplinary cohesion',
+    title: 'Build an interdisciplinary network',
+    body: 'Connect researchers, clinicians, psychologists, computer scientists, data scientists, and ethicists across Europe to foster knowledge exchange and collaborative research.',
+  },
+  {
+    icon: Microscope,
+    iconColor: 'text-teal-500',
+    label: 'Technological innovation',
+    title: 'Develop AI-assisted diagnostic tools',
+    body: 'Create innovative, evidence-based AI technologies that enhance diagnostic accuracy, support early detection, and provide personalised intervention recommendations while maintaining ethical standards.',
+  },
+  {
+    icon: Heart,
+    iconColor: 'text-rose-500',
+    label: 'Patient-centred care',
+    title: 'Improve early intervention',
+    body: 'Enable timely identification of mental health challenges and facilitate rapid access to appropriate care, ultimately reducing the burden on individuals and healthcare systems.',
+  },
+  {
+    icon: Users,
+    iconColor: 'text-amber-500',
+    label: 'Equitable access',
+    title: 'Promote accessibility and equity',
+    body: 'Ensure that digital mental health solutions are accessible, culturally appropriate, and beneficial to diverse populations across Europe, regardless of geographic or socioeconomic barriers.',
+  },
+]
+
+const outcomeHighlights = [
+  {
+    icon: Target,
+    iconColor: 'text-brand-cerulean',
+    title: 'Enhanced diagnostic accuracy through AI-powered assessment tools.',
+  },
+  {
+    icon: Target,
+    iconColor: 'text-teal-500',
+    title: 'Reduced waiting times for mental health assessments and interventions.',
+  },
+  {
+    icon: Target,
+    iconColor: 'text-indigo-500',
+    title: 'Cross-border knowledge sharing and best practice development.',
+  },
+  {
+    icon: Target,
+    iconColor: 'text-amber-500',
+    title: 'Training opportunities for early-career researchers in digital mental health.',
+  },
+  {
+    icon: Target,
+    iconColor: 'text-rose-500',
+    title: 'Ethical frameworks for responsible AI use in mental health care.',
+  },
+]
+
+const workingGroups = [
+  {
+    id: 'wg1',
+    name: 'WG1 — Terminology, Standards & Interoperability (AI-ready)',
+    purpose:
+      'Establish the common language and technical foundations so all partners can describe mental-health phenomena and datasets in compatible ways, and AI systems (LLMs/RAG/KGs) can be audited, traced and integrated safely.',
+    classificationNote:
+      'In psychiatry, multiple classification systems coexist, and experts often disagree on diagnostic boundaries or construct definitions. To ensure conceptual consistency and interoperability, this Action adopts the ICD-11 framework as its primary reference. ICD-11 offers globally standardized terminology, dimensional specifiers aligned with current clinical practice, and digital compatibility that facilitates integration with AI-ready knowledge representations.',
+    streams: [
+      {
+        label: 'A-PSY',
+        description:
+          'Curate a clinically grounded Open Glossary (ICD-11 constructs, symptom clusters, outcomes), define Minimal Clinical Dataset elements and consent language understandable to patients and clinicians.',
+      },
+      {
+        label: 'B-INF',
+        description:
+          'Specify Knowledge-Graph (KG) schema & ontology mappings (ICD-11/SNOMED/etc.), FAIR metadata profiles, and LLM artefact standards (prompt/trace logging, data sheets, model cards, RAG citation fields).',
+      },
+    ],
+    participants: 'Clinical taxonomists, psychometricians, health-informatics and semantic-web engineers, data stewards.',
+    interfaces: 'Other WGs consult the glossary/standards; no joint tasks.',
+    outOfScope: 'Running acquisition studies, building benchmarks, or doing pilots.',
+  },
+  {
+    id: 'wg2',
+    name: 'WG2 — Acquisition Protocols & Cohort Registry (LLM/KG-friendly)',
+    purpose:
+      'Harmonise how data are captured and documented (clinical, psychometric, speech/conversation, paralinguistics), and catalogue existing cohorts/tools so teams can align methods without sharing raw data.',
+    streams: [
+      {
+        label: 'A-PSY',
+        description:
+          'Produce a Protocol Compendium for clinical/psychometric/speech elicitation; define annotation guides (turn-level intents, affect, uncertainty, clinician rationales) with inter-rater procedures.',
+      },
+      {
+        label: 'B-INF',
+        description:
+          'Deliver a Registry Portal & API (cohorts, measures, tools) and a KG Population Playbook to transform registry metadata into a KG (provenance included). No new data collection.',
+      },
+    ],
+    participants: 'Clinicians, speech scientists, annotators, data managers, software engineers.',
+    interfaces: 'WG3 may reference registry metadata to design tasks; WG1 standards are consulted.',
+    outOfScope: 'Conducting clinical pilots.',
+  },
+  {
+    id: 'wg3',
+    name: 'WG3 — Tasks, Metrics & Benchmark Design (AI/LLM focus)',
+    purpose:
+      'Define what good looks like for mental-health AI by specifying reference tasks, metrics (factuality, faithfulness, calibration, bias/fairness, robustness, multilinguality, speech), and baseline suites for LLM/RAG/KG methods.',
+    clinicalReasoningNote:
+      'Map the clinical reasoning chain from patient presentation to diagnosis, from diagnosis to treatment decision, and from intervention to outcome assessment, across three high-pressure settings: emergency departments, general psychiatry outpatient clinics, and primary care. Identify critical points and failure modes in this chain that may compromise diagnostic accuracy or treatment appropriateness. Define current gold standards for diagnostic and therapeutic decision-making, and specify how AI-based systems could support clinicians in improving consistency, timeliness, and quality of care.',
+    streams: [
+      {
+        label: 'A-PSY',
+        description:
+          'Specify clinically meaningful tasks (screening, differential triage, longitudinal monitoring), inclusion/exclusion and gold-standard labelling; define fairness constructs and outcome measures.',
+      },
+      {
+        label: 'B-INF',
+        description:
+          'Deliver a Metric Pack & Evaluation Toolkit (docs + test sets), Challenge Rulebook (reproducibility, privacy, safety), and public leaderboards with transparent baselines (where permissible).',
+      },
+    ],
+    participants: 'Clinical methodologists, evaluation scientists, ML/NLP/ASR researchers, benchmark curators.',
+    interfaces: 'May consult WG1/2 documents; publishes reports that others can read.',
+    outOfScope: 'Executing hospital pilots/implementations.',
+  },
+  {
+    id: 'wg4',
+    name: 'WG4 — Implementation Guidelines & Clinical Workflow Integration (AI systems)',
+    purpose:
+      'Turn standards and benchmarks into actionable guidance for safe, usable AI-assisted DSS in emergency departments, primary care and community mental-health centres without building products.',
+    evaluationNote:
+      'Evaluate whether and how AI-based models developed within the Action effectively enhance clinical performance, by assessing their impact on diagnostic accuracy, decision-making quality, and time efficiency in simulated environments replicating real-world workflows.',
+    streams: [
+      {
+        label: 'A-PSY',
+        description:
+          'Create UX heuristics for clinicians/patients, cognitive-load and acceptability checklists, safety & escalation pathways (human-in-the-loop).',
+      },
+      {
+        label: 'B-INF',
+        description:
+          'Publish reference architectures (on-prem/edge, hybrid-cloud) for RAG over EHR with KG back-ends, prompt governance & guardrails, monitoring (drift, performance, safety) and auditability.',
+      },
+    ],
+    participants: 'Clinicians with service-design interest, HCI/UX researchers, health-IT architects, MLOps engineers.',
+    interfaces: 'Consumes WG1 standards as inputs on paper; shares guidance that others may read.',
+    outOfScope: 'Defining standards (WG1) or benchmark metrics (WG3); no site deployments/pilots.',
+  },
+  {
+    id: 'wg5',
+    name: 'WG5 — Ethics, Policy, Training & Communication (Responsible AI)',
+    purpose:
+      'Ensure responsible AI across the Action: ethics, legal and social implications; governance models; capacity-building (Training Schools/STSMs) for both communities; clear communication to clinicians, patients and policymakers.',
+    responsibleAINote:
+      'Expand responsible-AI activities to include post-deployment monitoring frameworks that assess ethical, clinical, and social impacts over time (“ethics in use”). Strengthen patient involvement through co-creation of communication and training materials, ensuring that AI explainability tools and consent information are accessible, transparent, and sensitive to stigma and cultural diversity.',
+    streams: [
+      {
+        label: 'A-PSY',
+        description:
+          'Develop risk scenarios for mental-health AI (consent, stigma, harm mitigation, accessibility), clinician-facing training and patient communication toolkits.',
+      },
+      {
+        label: 'B-INF',
+        description:
+          'Define AI governance & model-risk tiers (documentation, logging, approvals), procurement policy briefs, and technical training on LLM/RAG/KG safety & evaluation.',
+      },
+    ],
+    participants: 'Bioethicists, clinicians, legal scholars, standards liaisons, safety/assurance engineers, science communicators.',
+    interfaces: 'Provides documents and training offers usable by all; no cross-WG tasking.',
+    outOfScope: 'Writing technical standards (WG1), acquisition protocols (WG2), or metric design (WG3).',
+  },
+]
+
+const proponents = membersData
+  .filter(({ role, show }) => Boolean(show) && (role === 'Main Proponent' || role === 'Proponent'))
+  .sort((first, second) => {
+    if (first.role === second.role) {
+      const surnameComparison = first.surname.localeCompare(second.surname)
+      if (surnameComparison !== 0) {
+        return surnameComparison
+      }
+
+      return first.name.localeCompare(second.name)
+    }
+
+    return first.role === 'Main Proponent' ? -1 : 1
+  })
+  .map(({ title, name, surname, affiliation, department, country }) => ({
+    title,
+    givenName: name,
+    surname,
+    fullName: getMemberFullName({ title, name, surname }),
+    institution: affiliation,
+    description: department ?? null,
+    country,
+    countryFlagCode: getCountryFlagCode(country),
+  }))
+
+const uniqueCountriesWithMembers = (() => {
+  const counts = membersData.reduce((accumulator, member) => {
+    const displayName = getDisplayCountryName(member.country)
+    if (!accumulator.has(displayName)) {
+      accumulator.set(displayName, 0)
+    }
+
+    accumulator.set(displayName, accumulator.get(displayName) + 1)
+    return accumulator
+  }, new Map())
+
+  return Array.from(counts.entries())
+    .map(([country, count]) => ({ country, count }))
+    .sort((a, b) => a.country.localeCompare(b.country))
+})()
+
+const participatingCountries = uniqueCountriesWithMembers.map(({ country }) => country)
+const membersCount = membersData.length
+const countriesCount = participatingCountries.length
+
+const stats = [
+  { value: membersCount, suffix: '', label: 'Actual members' },
+  { value: countriesCount, suffix: '', label: 'Countries represented' },
+  { value: 4, suffix: '', label: 'Focus domains' },
+]
+
 const bannerAnimationStyles = `
   @keyframes banner-marquee {
     0% {
@@ -260,7 +606,7 @@ function EuropeMap({ countriesWithMembers }) {
           <path
             key={countryName}
             d={path}
-            fill={isHighlighted ? '#3b82f6' : '#64748b'}
+            fill={isHighlighted ? '#f59e0b' : '#64748b'}
             fillOpacity={isHighlighted ? 0.9 : 0.45}
             stroke="#f1f5f9"
             strokeOpacity={0.3}
@@ -347,27 +693,12 @@ function Banner() {
 
 // Header component with scroll-spy behavior
 function Header() {
-  const navigation = useMemo(
-    () => [
-      { id: 'hero', label: 'Home' },
-      { id: 'mission', label: 'Mission' },
-      { id: 'proposal', label: 'Proposal' },
-      { id: 'challenge', label: 'Challenge' },
-      { id: 'aim', label: 'Our Aim' },
-      { id: 'impact', label: 'Impact' },
-      { id: 'working-groups', label: 'Working Groups' },
-      { id: 'solution', label: 'Join Us' },
-      { id: 'vision', label: 'Vision' },
-    ],
-    [],
-  )
-
   const [activeSection, setActiveSection] = useState('hero')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   useEffect(() => {
     const getSectionOffsets = () =>
-      navigation
+      navigationLinks
         .map(({ id }) => {
           const element = document.getElementById(id)
           return element
@@ -401,7 +732,7 @@ function Header() {
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [navigation])
+  }, [])
 
   useEffect(() => {
     const handleResize = () => {
@@ -448,7 +779,7 @@ function Header() {
         </button>
 
         <div className="hidden items-center gap-8 text-xs font-semibold uppercase tracking-[0.3em] text-slate-600 sm:flex">
-          {navigation.map(({ id, label }) => (
+          {navigationLinks.map(({ id, label }) => (
             <a
               key={id}
               href={`#${id}`}
@@ -471,7 +802,7 @@ function Header() {
           }`}
         >
           <div className="flex flex-col gap-3 px-4 py-4 text-xs font-semibold uppercase tracking-[0.25em] text-slate-700">
-            {navigation.map(({ id, label }) => (
+            {navigationLinks.map(({ id, label }) => (
               <a
                 key={id}
                 href={`#${id}`}
@@ -944,7 +1275,7 @@ function App() {
                           event.preventDefault()
                           smoothScrollTo('proposal')
                         }}
-                        className="inline-flex items-center gap-3 bg-white px-8 py-3 text-base font-semibold uppercase tracking-[0.2em] text-slate-900 shadow-lg transition hover:bg-slate-100"
+                        className="inline-flex items-center gap-3 bg-amber-400 px-8 py-3 text-base font-semibold uppercase tracking-[0.2em] text-slate-900 shadow-lg transition hover:bg-amber-500"
                       >
                         Explore the proposal
                         <ArrowDown className="h-5 w-5" />
@@ -1188,7 +1519,7 @@ function App() {
               </div>
 
               <p className="text-base text-slate-700">
-                Each Working Group is co-led by one Informatics (INF) and one Psychology/Clinical (PSY) expert. Activities run in two independent streams (A-PSY and B-INF) with self-contained deliverables. Interfaces between WGs are strictly document-based (consultation of published outputs), ensuring stand-alone work while maintaining INF-PSY parity across leadership, outputs and training opportunities.
+              Each Working Group is co-led by one Informatics (INF) and one Psychology/Clinical (PSY) expert. Activities are designed and delivered collaboratively by mixed PSY–INF teams, with shared milestones and co-authored deliverables. Interfaces between WGs combine joint working sessions and the exchange of draft and final documents, ensuring coherence and reuse while maintaining INF–PSY parity across leadership, outputs and training opportunities.
               </p>
             </div>
           </section>
