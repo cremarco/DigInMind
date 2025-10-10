@@ -116,5 +116,15 @@
     "country": "Switzerland",
     "role": "Proponent",
     "show": true
+  },
+  {
+    "title": "Dr",
+    "name": "David",
+    "surname": "La Barbera",
+    "affiliation": "University of Milano-Bicocca",
+    "department": "Department of Informatics, Systems and Communication (DISCo)",
+    "country": "Italy",
+    "role": "Proponent",
+    "show": true
   }
 ]
