@@ -126,5 +126,59 @@
     "country": "Italy",
     "role": "Proponent",
     "show": true
+  },
+  {
+    "title": "Prof",
+    "name": "Björn",
+    "surname": "Schuller",
+    "affiliation": "Technische Universität München",
+    "country": "Germany",
+    "role": "Proponent",
+    "show": true
+  },
+  {
+    "title": "Prof",
+    "name": "Camellia",
+    "surname": "Hancheva",
+    "affiliation": "Sofia University St Kliment Ochridski",
+    "country": "Bulgaria",
+    "role": "Proponent",
+    "show": true
+  },
+  {
+    "title": "Prof",
+    "name": "Elvada",
+    "surname": "Kazlauskas",
+    "affiliation": "Vilniaus Universitetas",
+    "country": "Lithuania",
+    "role": "Proponent",
+    "show": true
+  },
+  {
+    "title": "Prof",
+    "name": "Stanislava",
+    "surname": "Stoyanova",
+    "affiliation": "South-west University Neofit Rilski",
+    "country": "Bulgaria",
+    "role": "Proponent",
+    "show": true
+  },
+  {
+    "title": "Prof",
+    "name": "Dejan",
+    "surname": "Stevanovic",
+    "affiliation": "Clinic for Neurology and Psychiatry for Children and Youth",
+    "country": "Serbia",
+    "role": "Proponent",
+    "show": true
+  },
+  {
+    "title": "Prof",
+    "name": "Iolana",
+    "surname": "Podina",
+    "affiliation": "University of Bucharest",
+    "country": "Romania",
+    "role": "Proponent",
+    "show": true
   }
 ]
