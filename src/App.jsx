@@ -432,18 +432,14 @@ const workingGroups = [
 ]
 
 const proponents = membersData
-  .filter(({ role, show }) => Boolean(show) && (role === 'Main Proponent' || role === 'Proponent'))
+  .filter(({ show }) => Boolean(show))
   .sort((first, second) => {
-    if (first.role === second.role) {
-      const surnameComparison = first.surname.localeCompare(second.surname)
-      if (surnameComparison !== 0) {
-        return surnameComparison
-      }
-
-      return first.name.localeCompare(second.name)
+    const surnameComparison = first.surname.localeCompare(second.surname)
+    if (surnameComparison !== 0) {
+      return surnameComparison
     }
 
-    return first.role === 'Main Proponent' ? -1 : 1
+    return first.name.localeCompare(second.name)
   })
   .map(({ title, name, surname, affiliation, department, country }) => ({
     title,
@@ -455,32 +451,6 @@ const proponents = membersData
     country,
     countryFlagCode: getCountryFlagCode(country),
   }))
-
-const uniqueCountriesWithMembers = (() => {
-  const counts = membersData.reduce((accumulator, member) => {
-    const displayName = getDisplayCountryName(member.country)
-    if (!accumulator.has(displayName)) {
-      accumulator.set(displayName, 0)
-    }
-
-    accumulator.set(displayName, accumulator.get(displayName) + 1)
-    return accumulator
-  }, new Map())
-
-  return Array.from(counts.entries())
-    .map(([country, count]) => ({ country, count }))
-    .sort((a, b) => a.country.localeCompare(b.country))
-})()
-
-const participatingCountries = uniqueCountriesWithMembers.map(({ country }) => country)
-const membersCount = membersData.length
-const countriesCount = participatingCountries.length
-
-const stats = [
-  { value: membersCount, suffix: '', label: 'Actual members' },
-  { value: countriesCount, suffix: '', label: 'Countries represented' },
-  { value: 4, suffix: '', label: 'Focus domains' },
-]
 
 const bannerAnimationStyles = `
   @keyframes banner-marquee {
@@ -905,12 +875,12 @@ function App() {
 
   const uniqueCountriesWithMembers = useMemo(() => {
     const counts = membersData.reduce((accumulator, member) => {
-      const displayName = getDisplayCountryName(member.country)
-      if (!accumulator.has(displayName)) {
-        accumulator.set(displayName, 0)
+      if (!member.show || !member.country) {
+        return accumulator
       }
 
-      accumulator.set(displayName, accumulator.get(displayName) + 1)
+      const displayName = getDisplayCountryName(member.country)
+      accumulator.set(displayName, (accumulator.get(displayName) ?? 0) + 1)
       return accumulator
     }, new Map())
 
@@ -924,47 +894,36 @@ function App() {
     [uniqueCountriesWithMembers],
   )
 
-  const membersCount = useMemo(() => membersData.length, [])
+  const membersCount = useMemo(
+    () => membersData.filter(({ show }) => Boolean(show)).length,
+    [],
+  )
+  const pendingMembersCount = useMemo(
+    () => membersData.filter(({ show }) => !show).length,
+    [],
+  )
   const countriesCount = participatingCountries.length
 
   const stats = useMemo(
     () => [
-      { value: membersCount, suffix: '', label: 'Actual members' },
+      { value: membersCount, suffix: '', label: 'Confirmed proponents' },
       { value: countriesCount, suffix: '', label: 'Countries represented' },
       { value: 4, suffix: '', label: 'Focus domains' },
     ],
     [membersCount, countriesCount],
   )
 
-  // Shared layout utilities keep section spacing and copy styling consistent
-  const containerClasses = 'mx-auto w-full max-w-5xl px-6 sm:px-10 lg:px-12'
-  const sectionSpacing = 'py-24'
-  const narrativeClasses = 'mt-12 space-y-6 text-lg sm:text-xl leading-relaxed text-slate-700'
-  const cardSurface = 'group text-left shadow-sm transition hover:-translate-y-1 hover:shadow-lg'
-  const cardPadding = 'p-8 sm:p-10'
-  const cardInnerSpacing = 'space-y-6'
-  const cardLabelStyles = 'flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em]'
-  const cardTitleStyles = 'text-lg font-semibold'
-  const cardBodyStyles = 'text-sm leading-relaxed'
-
-  // Precomputed content collections keep the JSX declarative and readable
-  const proponents = useMemo(
+  const confirmedProponents = useMemo(
     () =>
       membersData
-        .filter(({ role, show }) =>
-          Boolean(show) && (role === 'Main Proponent' || role === 'Proponent'),
-        )
+        .filter(({ show }) => Boolean(show))
         .sort((first, second) => {
-          if (first.role === second.role) {
-            const surnameComparison = first.surname.localeCompare(second.surname)
-            if (surnameComparison !== 0) {
-              return surnameComparison
-            }
-
-            return first.name.localeCompare(second.name)
+          const surnameComparison = first.surname.localeCompare(second.surname)
+          if (surnameComparison !== 0) {
+            return surnameComparison
           }
 
-          return first.role === 'Main Proponent' ? -1 : 1
+          return first.name.localeCompare(second.name)
         })
         .map(({ title, name, surname, affiliation, department, country }) => ({
           title,
@@ -979,39 +938,66 @@ function App() {
     [],
   )
 
-  const featureCards = useMemo(
-    () => [
-      {
-        icon: Brain,
-        iconColor: 'text-brand-cerulean',
-        label: 'Innovation pillar',
-        title: 'AI-assisted innovation',
-        body: 'Leveraging artificial intelligence for enhanced diagnostic accuracy and early intervention.',
-      },
-      {
-        icon: Users,
-        iconColor: 'text-teal-500',
-        label: 'Network pillar',
-        title: 'Interdisciplinary network',
-        body: 'Connecting psychologists, clinicians, and computer scientists across disciplines.',
-      },
-      {
-        icon: Globe,
-        iconColor: 'text-indigo-500',
-        label: 'Reach pillar',
-        title: 'Pan-European reach',
-        body: 'Building collaboration across European countries and research institutions.',
-      },
-      {
-        icon: Lightbulb,
-        iconColor: 'text-amber-500',
-        label: 'Impact pillar',
-        title: 'Accessible solutions',
-        body: 'Developing tools to make mental health support more accessible to all communities.',
-      },
-    ],
+  const pendingProponents = useMemo(
+    () =>
+      membersData
+        .filter(({ show }) => !show)
+        .map(({ title, name, surname, affiliation, country }) => ({
+          title,
+          givenName: name,
+          surname,
+          fullName: getMemberFullName({ title, name, surname }),
+          institution: affiliation || null,
+          country: country || null,
+        })),
     [],
   )
+
+  // Shared layout utilities keep section spacing and copy styling consistent
+  const containerClasses = 'mx-auto w-full max-w-5xl px-6 sm:px-10 lg:px-12'
+  const sectionSpacing = 'py-24'
+  const narrativeClasses = 'mt-12 space-y-6 text-lg sm:text-xl leading-relaxed text-slate-700'
+  const cardSurface = 'group text-left shadow-sm transition hover:-translate-y-1 hover:shadow-lg'
+  const cardPadding = 'p-8 sm:p-10'
+  const cardInnerSpacing = 'space-y-6'
+  const cardLabelStyles = 'flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em]'
+  const cardTitleStyles = 'text-lg font-semibold'
+  const cardBodyStyles = 'text-sm leading-relaxed'
+
+  // Precomputed content collections keep the JSX declarative and readable
+const featureCards = useMemo(
+  () => [
+    {
+      icon: Brain,
+      iconColor: 'text-brand-cerulean',
+      label: 'Innovation pillar',
+      title: 'AI-assisted innovation',
+      body: 'Leveraging artificial intelligence for enhanced diagnostic accuracy and early intervention.',
+    },
+    {
+      icon: Users,
+      iconColor: 'text-teal-500',
+      label: 'Network pillar',
+      title: 'Interdisciplinary network',
+      body: 'Connecting psychologists, clinicians, and computer scientists across disciplines.',
+    },
+    {
+      icon: Globe,
+      iconColor: 'text-indigo-500',
+      label: 'Reach pillar',
+      title: 'Pan-European reach',
+      body: 'Building collaboration across European countries and research institutions.',
+    },
+    {
+      icon: Lightbulb,
+      iconColor: 'text-amber-500',
+      label: 'Impact pillar',
+      title: 'Accessible solutions',
+      body: 'Developing tools to make mental health support more accessible to all communities.',
+    },
+  ],
+  [],
+)
 
   const challengeCards = useMemo(
     () => [
@@ -1263,7 +1249,7 @@ function App() {
                     <p className="text-base sm:text-lg md:text-xl text-white/75 text-left">
                       We unite clinicians, researchers, and technologists to accelerate ethical, data-driven tools that improve early detection, personalised interventions, and equitable access to mental health support across Europe.
                     </p>
-                    <div className="grid gap-6 sm:grid-cols-3">
+                    <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-4">
                       {stats.map((stat) => (
                         <AnimatedStat key={stat.label} value={stat.value} suffix={stat.suffix} label={stat.label} />
                       ))}
@@ -1335,6 +1321,16 @@ function App() {
                   </article>
                 ))}
               </div>
+              {pendingMembersCount > 0 ? (
+                <article className={`relative ${cardSurface} bg-slate-50 px-5 py-5 sm:px-4 sm:py-4`}>
+                  <div className="space-y-3">
+                    <h3 className="text-base font-semibold leading-tight text-slate-900">Pending invitations</h3>
+                    <p className="text-xs leading-snug text-slate-600">
+                      {pendingMembersCount} additional proponents are in the invitation process and will appear soon.
+                    </p>
+                  </div>
+                </article>
+              ) : null}
             </div>
           </section>
 
