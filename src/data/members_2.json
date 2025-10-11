@@ -6,6 +6,7 @@
     "affiliation": "University of Milano-Bicocca",
     "department": "Department of Informatics, Systems and Communication (DISCo)",
     "country": "Italy",
+    "role": "Main Proponent",
     "show": true
   },
   {
@@ -15,6 +16,7 @@
     "affiliation": "University of Torino",
     "department": "Dipartiment of Neuroscience \"Rita Levi Montalcini\"",
     "country": "Italy",
+    "role": "Main Proponent",
     "show": true
   },
   {
@@ -24,6 +26,7 @@
     "affiliation": "University of Bari",
     "department": "Department of Informatics",
     "country": "Italy",
+    "role": "Proponent",
     "show": true
   },
   {
@@ -33,6 +36,7 @@
     "affiliation": "University of Torino",
     "department": "Dipartiment of Neuroscience \"Rita Levi Montalcini\"",
     "country": "Italy",
+    "role": "Main Proponent",
     "show": true
   },
   {
@@ -42,6 +46,7 @@
     "affiliation": "University of Milano-Bicocca",
     "department": "Department of Informatics, Systems and Communication (DISCo)",
     "country": "Italy",
+    "role": "Main Proponent",
     "show": true
   },
   {
@@ -51,6 +56,7 @@
     "affiliation": "University of Padua",
     "department": "Department of General Psychology",
     "country": "Italy",
+    "role": "Proponent",
     "show": true
   },
   {
@@ -60,6 +66,7 @@
     "affiliation": "University of Padua",
     "department": "Department of General Psychology",
     "country": "Italy",
+    "role": "Proponent",
     "show": true
   },
   {
@@ -69,6 +76,7 @@
     "affiliation": "Uppsala University",
     "department": "Department of Women's and Children's Health",
     "country": "Sweden",
+    "role": "Proponent",
     "show": true
   },
   {
@@ -78,6 +86,7 @@
     "affiliation": "Polish Academy of Sciences",
     "department": "Department of Stochastic Methods",
     "country": "Poland",
+    "role": "Proponent",
     "show": true
   },
   {
@@ -86,6 +95,7 @@
     "surname": "Mortier",
     "affiliation": "Hospital del Mar Research Institute",
     "country": "Spain",
+    "role": "Proponent",
     "show": true
   },
   {
@@ -94,6 +104,7 @@
     "surname": "Bernaerts",
     "affiliation": "Thomas More University of Applied Sciences",
     "country": "Belgium",
+    "role": "Proponent",
     "show": true
   },
   {
@@ -103,6 +114,7 @@
     "affiliation": "Univsersità della Svizzera Italiana",
     "department": "Faculty of Biomedical Sciences",
     "country": "Switzerland",
+    "role": "Proponent",
     "show": true
   },
   {
@@ -112,6 +124,7 @@
     "affiliation": "University of Milano-Bicocca",
     "department": "Department of Informatics, Systems and Communication (DISCo)",
     "country": "Italy",
+    "role": "Proponent",
     "show": true
   },
   {
@@ -120,6 +133,7 @@
     "surname": "Schuller",
     "affiliation": "Technische Universität München",
     "country": "Germany",
+    "role": "Proponent",
     "show": true
   },
   {
@@ -128,6 +142,7 @@
     "surname": "Hancheva",
     "affiliation": "Sofia University St Kliment Ochridski",
     "country": "Bulgaria",
+    "role": "Proponent",
     "show": true
   },
   {
@@ -136,6 +151,7 @@
     "surname": "Kazlauskas",
     "affiliation": "Vilniaus Universitetas",
     "country": "Lithuania",
+    "role": "Proponent",
     "show": true
   },
   {
@@ -144,6 +160,7 @@
     "surname": "Stoyanova",
     "affiliation": "South-west University Neofit Rilski",
     "country": "Bulgaria",
+    "role": "Proponent",
     "show": true
   },
   {
@@ -152,6 +169,7 @@
     "surname": "Stevanovic",
     "affiliation": "Clinic for Neurology and Psychiatry for Children and Youth",
     "country": "Serbia",
+    "role": "Proponent",
     "show": true
   },
   {
@@ -160,114 +178,7 @@
     "surname": "Podina",
     "affiliation": "University of Bucharest",
     "country": "Romania",
+    "role": "Proponent",
     "show": true
-  },
-  {
-    "title": "",
-    "name": "Andreas",
-    "surname": "Triantafyllopoulos",
-    "affiliation": "",
-    "department": "",
-    "country": "",
-    "show": false
-  },
-  {
-    "title": "",
-    "name": "Anika",
-    "surname": "Spiesberger",
-    "affiliation": "",
-    "department": "",
-    "country": "",
-    "show": false
-  },
-  {
-    "title": "",
-    "name": "Manuel",
-    "surname": "Milling",
-    "affiliation": "",
-    "department": "",
-    "country": "",
-    "show": false
-  },
-  {
-    "title": "",
-    "name": "Nele",
-    "surname": "De Witte",
-    "affiliation": "",
-    "department": "",
-    "country": "",
-    "show": false
-  },
-  {
-    "title": "",
-    "name": "Pepijn",
-    "surname": "van de Ven",
-    "affiliation": "",
-    "department": "",
-    "country": "",
-    "show": false
-  },
-  {
-    "title": "",
-    "name": "Gerhard",
-    "surname": "Andersson",
-    "affiliation": "",
-    "department": "",
-    "country": "",
-    "show": false
-  },
-  {
-    "title": "Mr",
-    "name": "David",
-    "surname": "Chierigato",
-    "affiliation": "Università degli Studi di Milano-Bicocca",
-    "department": "Department of Informatics, Systems and Communication (DISCo)",
-    "country": "Italy",
-    "show": true
-  },
-  {
-    "title": "Prof",
-    "name": "Pedro",
-    "surname": "Gamito",
-    "affiliation": "Universidade Lusófona",
-    "department": "HEI-Lab",
-    "country": "Portugal",
-    "show": true
-  },
-  {
-    "title": "Dr",
-    "name": "Stefan",
-    "surname": "Jerotic",
-    "affiliation": "Faculty of Medicine, University of Belgrade",
-    "department": "",
-    "country": "Serbia",
-    "show": true
-  },
-  {
-    "title": "",
-    "name": "Tsvetelina",
-    "surname": "Hadzhieva",
-    "affiliation": "",
-    "department": "",
-    "country": "",
-    "show": false
-  },
-  {
-    "title": "Prof",
-    "name": "Júlia",
-    "surname": "Halamová",
-    "affiliation": "Comenius University in Bratislava",
-    "department": "Institute of Applied Psychology",
-    "country": "Slovakia",
-    "show": true
-  },
-  {
-    "title": "",
-    "name": "Sergiy",
-    "surname": "Bogdanov",
-    "affiliation": "",
-    "department": "",
-    "country": "",
-    "show": false
   }
 ]
