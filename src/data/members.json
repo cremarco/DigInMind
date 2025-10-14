@@ -269,5 +269,50 @@
     "department": "",
     "country": "",
     "show": false
+  },
+  {
+    "title": "",
+    "name": "Polona",
+    "surname": "Rus Prelog",
+    "affiliation": "",
+    "department": "",
+    "country": "",
+    "show": false
+  },
+  {
+    "title": "Dr",
+    "name": "Pinar",
+    "surname": "Ünal-Aydın",
+    "affiliation": "International University of Sarajevo",
+    "department": "Psychology",
+    "country": "Bosnia and Herzegovina",
+    "show": true
+  },
+  {
+    "title": "Prof",
+    "name": "Emanuele",
+    "surname": "Preti",
+    "affiliation": "Università degli Studi di Milano-Bicocca",
+    "department": "Department of Psychology",
+    "country": "Italy",
+    "show": true
+  },
+  {
+    "title": "Dr",
+    "name": "Claudette",
+    "surname": "Pretorius",
+    "affiliation": "University College Dublin",
+    "department": "School of Computer Science",
+    "country": "Ireland",
+    "show": true
+  },
+  {
+    "title": "",
+    "name": "Valdo",
+    "surname": "Ricca",
+    "affiliation": "",
+    "department": "",
+    "country": "",
+    "show": false
   }
 ]
