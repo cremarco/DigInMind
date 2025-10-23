@@ -1131,17 +1131,17 @@ function App() {
                 <div className="flex flex-col gap-8">
                   <div className="space-y-3">
                     <p className="text-xs font-semibold uppercase tracking-[0.35em] text-slate-500">Countries represented</p>
-                    <ul className="space-y-3 text-sm text-slate-600">
+                    <div className="grid grid-cols-2 gap-3 text-sm text-slate-600">
                       {uniqueCountriesWithMembers.map(({ country, count }) => (
-                        <li
+                        <div
                           key={country}
-                          className="flex items-center justify-between gap-6 bg-slate-50 px-5 py-3 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+                          className="flex items-center justify-between gap-3 bg-slate-50 px-3 py-2 rounded shadow-sm transition hover:shadow-md"
                         >
-                          <span className="font-semibold text-slate-800">{country}</span>
-                          <span className="text-xs uppercase tracking-[0.25em] text-blue-600">{count} member{count > 1 ? 's' : ''}</span>
-                        </li>
+                          <span className="font-semibold text-slate-800 text-xs">{country}</span>
+                          <span className="text-xs uppercase tracking-[0.2em] text-blue-600 bg-blue-100 px-2 py-1 rounded-full">{count}</span>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
 
                   <div className="bg-blue-50/80 p-6 text-left shadow-md">
