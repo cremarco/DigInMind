@@ -1123,31 +1123,29 @@ function App() {
                 </p>
               </div>
 
-              <div className="mt-16 grid gap-12 lg:grid-cols-2 lg:items-start">
+              <div className="mt-16 space-y-12">
                 <div className="overflow-hidden shadow-xl">
                   <EuropeMap countriesWithMembers={participatingCountries} />
                 </div>
 
-                <div className="flex flex-col gap-8">
-                  <div className="space-y-3">
-                    <p className="text-xs font-semibold uppercase tracking-[0.35em] text-slate-500">Countries represented</p>
-                    <div className="grid grid-cols-2 gap-3 text-sm text-slate-600">
-                      {uniqueCountriesWithMembers.map(({ country, count }) => (
-                        <div
-                          key={country}
-                          className="flex items-center justify-between gap-3 bg-slate-50 px-3 py-2 rounded shadow-sm transition hover:shadow-md"
-                        >
-                          <span className="font-semibold text-slate-800 text-xs">{country}</span>
-                          <span className="text-xs uppercase tracking-[0.2em] text-blue-600 bg-blue-100 px-2 py-1 rounded-full">{count}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                <div className="bg-blue-50/80 p-6 text-left shadow-md">
+                  <p className="text-sm text-slate-700">
+                    We actively welcome partners from additional countries. Reach out if you would like to collaborate or represent your national community within DigInMind.
+                  </p>
+                </div>
 
-                  <div className="bg-blue-50/80 p-6 text-left shadow-md">
-                    <p className="text-sm text-slate-700">
-                      We actively welcome partners from additional countries. Reach out if you would like to collaborate or represent your national community within DigInMind.
-                    </p>
+                <div className="space-y-3">
+                  <p className="text-xs font-semibold uppercase tracking-[0.35em] text-slate-500">Countries represented</p>
+                  <div className="grid grid-cols-3 gap-3 text-sm text-slate-600">
+                    {uniqueCountriesWithMembers.map(({ country, count }) => (
+                      <div
+                        key={country}
+                        className="flex items-center justify-between gap-3 bg-slate-50 px-3 py-2 rounded shadow-sm transition hover:shadow-md"
+                      >
+                        <span className="font-semibold text-slate-800 text-xs">{country}</span>
+                        <span className="text-xs uppercase tracking-[0.2em] text-blue-600 bg-blue-100 px-2 py-1 rounded-full">{count}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
