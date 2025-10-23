@@ -3,8 +3,8 @@
     "title": "Dr",
     "name": "Marco",
     "surname": "Cremaschi",
-    "affiliation": "University of Milano-Bicocca",
-    "department": "Department of Informatics, Systems and Communication (DISCo)",
+    "affiliation": "University of Milan-Bicocca",
+    "department": "Department of Informatics, Systems and Communication",
     "country": "Italy",
     "show": true
   },
@@ -12,8 +12,8 @@
     "title": "Prof",
     "name": "Antonio",
     "surname": "Preti",
-    "affiliation": "University of Torino",
-    "department": "Dipartiment of Neuroscience \"Rita Levi Montalcini\"",
+    "affiliation": "University of Turin",
+    "department": "Department of Neuroscience \"Rita Levi-Montalcini\"",
     "country": "Italy",
     "show": true
   },
@@ -21,8 +21,8 @@
     "title": "Dr",
     "name": "Gabriella",
     "surname": "Casalino",
-    "affiliation": "University of Bari",
-    "department": "Department of Informatics",
+    "affiliation": "University of Bari Aldo Moro",
+    "department": "Computer Science",
     "country": "Italy",
     "show": true
   },
@@ -30,17 +30,8 @@
     "title": "Dr",
     "name": "Francesco",
     "surname": "Bevione",
-    "affiliation": "University of Torino",
-    "department": "Dipartiment of Neuroscience \"Rita Levi Montalcini\"",
-    "country": "Italy",
-    "show": true
-  },
-  {
-    "title": "Prof",
-    "name": "Andrea",
-    "surname": "Maurino",
-    "affiliation": "University of Milano-Bicocca",
-    "department": "Department of Informatics, Systems and Communication (DISCo)",
+    "affiliation": "University of Turin",
+    "department": "Department of Neuroscience \"Rita Levi-Montalcini\"",
     "country": "Italy",
     "show": true
   },
@@ -57,25 +48,25 @@
     "title": "Dr",
     "name": "Erika",
     "surname": "Fanti",
-    "affiliation": "University of Padua",
-    "department": "Department of General Psychology",
+    "affiliation": "University of Milan-Bicocca",
+    "department": "Department of Psychology",
     "country": "Italy",
     "show": true
   },
   {
-    "title": "Prof",
+    "title": "Dr",
     "name": "Charlotte",
     "surname": "Blease",
     "affiliation": "Uppsala University",
-    "department": "Department of Women's and Children's Health",
+    "department": "Women's and Children's Health",
     "country": "Sweden",
     "show": true
   },
   {
-    "title": "Prof",
+    "title": "Dr",
     "name": "Katarzyna",
     "surname": "Kaczmarek-Majer",
-    "affiliation": "Polish Academy of Sciences",
+    "affiliation": "Systems Research Institute, Polish Academy of Sciences",
     "department": "Department of Stochastic Methods",
     "country": "Poland",
     "show": true
@@ -85,7 +76,35 @@
     "name": "Philippe",
     "surname": "Mortier",
     "affiliation": "Hospital del Mar Research Institute",
+    "department": "Health Services Research Group, Epidemiology and Public Health Program",
     "country": "Spain",
+    "show": true
+  },
+  {
+    "title": "Prof",
+    "name": "Bjoern",
+    "surname": "Schuller",
+    "affiliation": "Klinikum rechts der Isar, Technical University of Munich",
+    "department": "Chair of Health Informatics",
+    "country": "Germany",
+    "show": true
+  },
+  {
+    "title": "Mr",
+    "name": "Andreas",
+    "surname": "Triantafyllopoulos",
+    "affiliation": "Technical University of Munich",
+    "department": "",
+    "country": "Germany",
+    "show": true
+  },
+  {
+    "title": "Mr",
+    "name": "Manuel",
+    "surname": "Milling",
+    "affiliation": "Klinikum rechts der Isar, Technical University of Munich",
+    "department": "Chair of Health Informatics",
+    "country": "Germany",
     "show": true
   },
   {
@@ -93,48 +112,61 @@
     "name": "Sylvie",
     "surname": "Bernaerts",
     "affiliation": "Thomas More University of Applied Sciences",
+    "department": "Centre of Expertise Care and Well-being",
     "country": "Belgium",
+    "show": true
+  },
+  {
+    "title": "Prof",
+    "name": "Pepijn",
+    "surname": "van de Ven",
+    "affiliation": "University of Limerick",
+    "department": "Electronic & Computer Engineering",
+    "country": "Ireland",
     "show": true
   },
   {
     "title": "Prof",
     "name": "Andrea",
     "surname": "Raballo",
-    "affiliation": "Univsersità della Svizzera Italiana",
-    "department": "Faculty of Biomedical Sciences",
+    "affiliation": "University of Italian Switzerland",
+    "department": "Faculty of Biomedicine, Chair of Psychiatry",
     "country": "Switzerland",
     "show": true
   },
   {
+    "title": "Prof",
+    "name": "Gerhard",
+    "surname": "Andersson",
+    "affiliation": "Linköping University",
+    "department": "IBL",
+    "country": "Sweden",
+    "show": true
+  },
+  {
     "title": "Dr",
-    "name": "David",
-    "surname": "La Barbera",
-    "affiliation": "University of Milano-Bicocca",
-    "department": "Department of Informatics, Systems and Communication (DISCo)",
-    "country": "Italy",
-    "show": true
-  },
-  {
-    "title": "Prof",
-    "name": "Björn",
-    "surname": "Schuller",
-    "affiliation": "Technische Universität München",
-    "country": "Germany",
-    "show": true
-  },
-  {
-    "title": "Prof",
     "name": "Camellia",
     "surname": "Hancheva",
-    "affiliation": "Sofia University St Kliment Ochridski",
+    "affiliation": "Sofia University St Kliment Ohridski",
+    "department": "General, experimental, developmental and health psychology",
     "country": "Bulgaria",
     "show": true
   },
   {
     "title": "Prof",
-    "name": "Elvada",
+    "name": "Pedro",
+    "surname": "Gamito",
+    "affiliation": "Lusofona University",
+    "department": "HEI-Lab",
+    "country": "Portugal",
+    "show": true
+  },
+  {
+    "title": "Prof",
+    "name": "Evaldas",
     "surname": "Kazlauskas",
-    "affiliation": "Vilniaus Universitetas",
+    "affiliation": "Vilnius University",
+    "department": "Institute of Psychology",
     "country": "Lithuania",
     "show": true
   },
@@ -142,96 +174,18 @@
     "title": "Prof",
     "name": "Stanislava",
     "surname": "Stoyanova",
-    "affiliation": "South-west University Neofit Rilski",
+    "affiliation": "South-West University 'Neofit Rilski'",
+    "department": "Psychology",
     "country": "Bulgaria",
     "show": true
   },
   {
-    "title": "Prof",
+    "title": "Dr",
     "name": "Dejan",
     "surname": "Stevanovic",
-    "affiliation": "Clinic for Neurology and Psychiatry for Children and Youth",
+    "affiliation": "Clinic for Neurology and Psychiatry for Children and Youth, Belgrade, Serbia",
+    "department": "",
     "country": "Serbia",
-    "show": true
-  },
-  {
-    "title": "Prof",
-    "name": "Iolana",
-    "surname": "Podina",
-    "affiliation": "University of Bucharest",
-    "country": "Romania",
-    "show": true
-  },
-  {
-    "title": "",
-    "name": "Andreas",
-    "surname": "Triantafyllopoulos",
-    "affiliation": "",
-    "department": "",
-    "country": "",
-    "show": false
-  },
-  {
-    "title": "",
-    "name": "Anika",
-    "surname": "Spiesberger",
-    "affiliation": "",
-    "department": "",
-    "country": "",
-    "show": false
-  },
-  {
-    "title": "",
-    "name": "Manuel",
-    "surname": "Milling",
-    "affiliation": "",
-    "department": "",
-    "country": "",
-    "show": false
-  },
-  {
-    "title": "",
-    "name": "Nele",
-    "surname": "De Witte",
-    "affiliation": "",
-    "department": "",
-    "country": "",
-    "show": false
-  },
-  {
-    "title": "",
-    "name": "Pepijn",
-    "surname": "van de Ven",
-    "affiliation": "",
-    "department": "",
-    "country": "",
-    "show": false
-  },
-  {
-    "title": "",
-    "name": "Gerhard",
-    "surname": "Andersson",
-    "affiliation": "",
-    "department": "",
-    "country": "",
-    "show": false
-  },
-  {
-    "title": "Mr",
-    "name": "David",
-    "surname": "Chierigato",
-    "affiliation": "Università degli Studi di Milano-Bicocca",
-    "department": "Department of Informatics, Systems and Communication (DISCo)",
-    "country": "Italy",
-    "show": true
-  },
-  {
-    "title": "Prof",
-    "name": "Pedro",
-    "surname": "Gamito",
-    "affiliation": "Universidade Lusófona",
-    "department": "HEI-Lab",
-    "country": "Portugal",
     "show": true
   },
   {
@@ -244,13 +198,22 @@
     "show": true
   },
   {
-    "title": "",
+    "title": "Dr",
     "name": "Tsvetelina",
     "surname": "Hadzhieva",
-    "affiliation": "",
+    "affiliation": "South-West University 'Neofit Rilski'",
+    "department": "Faculty of Philosophy",
+    "country": "Bulgaria",
+    "show": true
+  },
+  {
+    "title": "Prof",
+    "name": "Ioana",
+    "surname": "Podina",
+    "affiliation": "University of Bucharest",
     "department": "",
-    "country": "",
-    "show": false
+    "country": "Romania",
+    "show": true
   },
   {
     "title": "Prof",
@@ -262,26 +225,26 @@
     "show": true
   },
   {
-    "title": "",
+    "title": "Dr",
     "name": "Sergiy",
     "surname": "Bogdanov",
-    "affiliation": "",
-    "department": "",
-    "country": "",
-    "show": false
-  },
-  {
-    "title": "",
-    "name": "Polona",
-    "surname": "Rus Prelog",
-    "affiliation": "",
-    "department": "",
-    "country": "",
-    "show": false
+    "affiliation": "National University of Kyiv-Mohyla Academy",
+    "department": "Psychology and Pedagogy",
+    "country": "Ukraine",
+    "show": true
   },
   {
     "title": "Dr",
-    "name": "Pinar",
+    "name": "Polona",
+    "surname": "Rus Prelog",
+    "affiliation": "University Psychiatric Clinic Ljubljana",
+    "department": "Geriatric Psychiatry Department",
+    "country": "Slovenia",
+    "show": true
+  },
+  {
+    "title": "Dr",
+    "name": "Pınar",
     "surname": "Ünal-Aydın",
     "affiliation": "International University of Sarajevo",
     "department": "Psychology",
@@ -292,7 +255,7 @@
     "title": "Prof",
     "name": "Emanuele",
     "surname": "Preti",
-    "affiliation": "Università degli Studi di Milano-Bicocca",
+    "affiliation": "University of Milan-Bicocca",
     "department": "Department of Psychology",
     "country": "Italy",
     "show": true
@@ -307,12 +270,84 @@
     "show": true
   },
   {
-    "title": "",
-    "name": "Valdo",
-    "surname": "Ricca",
-    "affiliation": "",
+    "title": "Dr",
+    "name": "Femke",
+    "surname": "Lamers",
+    "affiliation": "Amsterdam UMC",
+    "department": "Psychiatry",
+    "country": "Netherlands",
+    "show": true
+  },
+  {
+    "title": "Prof",
+    "name": "Giovanni",
+    "surname": "Briganti",
+    "affiliation": "University of Mons",
     "department": "",
-    "country": "",
-    "show": false
+    "country": "Belgium",
+    "show": true
+  },
+  {
+    "title": "Dr",
+    "name": "Vanda",
+    "surname": "Lukacova",
+    "affiliation": "Charles University",
+    "department": "Psychiatry",
+    "country": "Czech Republic",
+    "show": true
+  },
+  {
+    "title": "Ms",
+    "name": "Dilara",
+    "surname": "Parry",
+    "affiliation": "University of Mons",
+    "department": "Unit of Computational Medicine and Neuropsychiatry",
+    "country": "Belgium",
+    "show": true
+  },
+  {
+    "title": "Dr",
+    "name": "Maria",
+    "surname": "Karekla",
+    "affiliation": "University of Cyprus",
+    "department": "Psychology",
+    "country": "Cyprus",
+    "show": true
+  },
+  {
+    "title": "Prof",
+    "name": "Raquel",
+    "surname": "Bailon",
+    "affiliation": "University of Zaragoza",
+    "department": "Electonic Engineering and Communications",
+    "country": "Spain",
+    "show": true
+  },
+  {
+    "title": "Dr",
+    "name": "Alfonso",
+    "surname": "Ortega",
+    "affiliation": "University of Zaragoza",
+    "department": "Electronic Engineering and Communications",
+    "country": "Spain",
+    "show": true
+  },
+  {
+    "title": "Prof",
+    "name": "Gregor",
+    "surname": "Štiglic",
+    "affiliation": "University of Maribor",
+    "department": "Faculty of health sciences",
+    "country": "Slovenia",
+    "show": true
+  },
+  {
+    "title": "Dr",
+    "name": "Sara",
+    "surname": "Siddi",
+    "affiliation": "Sant Joan de Deu Health Park",
+    "department": "Research, Teaching and Innovation Unit",
+    "country": "Spain",
+    "show": true
   }
 ]
