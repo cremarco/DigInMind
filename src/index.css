@@ -2,7 +2,7 @@
 
 @plugin "daisyui" {
   themes: light --default;
-  include: button, collapse;
+  include: rootcolor, button, collapse, navbar, menu;
   logs: false;
 }
 
@@ -55,22 +55,40 @@ a { text-underline-offset: 0.25em; }
 :focus-visible { outline: 3px solid #2563eb; outline-offset: 5px; }
 .dark-surface :focus-visible { outline-color: #fbbf24; }
 
-.btn {
+@utility collapse-title {
   min-height: 3rem;
-  height: auto;
-  padding-block: 0.75rem;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  white-space: normal;
-  text-align: center;
-  box-shadow: none;
 }
 
-.btn.cta { background: #fbbf24; border-color: #fbbf24; color: #0f172a; }
-.btn.cta:hover { background: #fcd34d; border-color: #fcd34d; }
-.collapse-title { min-height: 3rem; }
 .collapse:has(> summary:focus-visible) { outline: 3px solid #2563eb; outline-offset: 4px; }
+.collapse > summary:focus-visible { outline: none; }
+/* Close immediately for keyboard navigation; native details remain searchable. */
+details.collapse:not([open])::details-content { transition: none; }
 .mobile-navigation[hidden] { display: none; }
+
+/* Stable category colors keep each working group identifiable in every state. */
+.wg-panel {
+  --wg-color: #1d4ed8;
+  --wg-surface: #eff6ff;
+  --wg-ink: #1e3a8a;
+  border-color: color-mix(in srgb, var(--wg-color) 22%, white);
+}
+
+.wg-panel#wg2 { --wg-color: #0f766e; --wg-surface: #f0fdfa; --wg-ink: #134e4a; }
+.wg-panel#wg3 { --wg-color: #6d28d9; --wg-surface: #f5f3ff; --wg-ink: #4c1d95; }
+.wg-panel#wg4 { --wg-color: #a04c0b; --wg-surface: #fff8ed; --wg-ink: #78350f; }
+.wg-panel#wg5 { --wg-color: #be185d; --wg-surface: #fff1f5; --wg-ink: #831843; }
+
+.wg-heading { background: var(--wg-surface); color: var(--wg-ink); }
+.wg-heading:hover, .wg-heading:focus-visible { background: color-mix(in srgb, var(--wg-color) 12%, white); }
+.wg-secondary { color: color-mix(in srgb, var(--wg-ink) 85%, var(--wg-surface)); }
+.wg-label { background: var(--wg-color); color: #ffffff; }
+.wg-lead { color: var(--wg-color); }
+.wg-outputs { border-color: color-mix(in srgb, var(--wg-color) 20%, white); }
+.wg-stream { border-color: color-mix(in srgb, var(--wg-color) 35%, white); }
+.wg-chevron { transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1); }
+.wg-panel[open] > .wg-heading .wg-chevron { transform: rotate(180deg); }
+.wg-panel[open] > .wg-content { padding-bottom: 1.75rem; }
+.wg-panel:has(> summary:focus-visible) { outline-color: var(--wg-color); }
 
 @keyframes network-arrival {
   from {

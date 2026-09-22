@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { ArrowRightIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { ArrowRightIcon, Bars3Icon, ChevronDownIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import costLogo from '/images/logo-white.svg'
 import membersData from './data/members.json'
 import { challenges, intendedOutcomes, workingGroups } from './data/proposal'
@@ -9,6 +9,7 @@ const CONTACT_EMAIL = 'marco.cremaschi@unimib.it'
 const container = 'mx-auto w-full max-w-6xl px-5 sm:px-8 lg:px-12'
 const sectionSpace = 'py-14 sm:py-20'
 const heading = 'text-3xl font-semibold tracking-tight sm:text-4xl'
+const button = 'btn h-auto min-h-12 whitespace-normal py-3 text-[0.9375rem] shadow-none'
 const countryFlagCodes = {
   Belgium: 'be',
   'Bosnia and Herzegovina': 'ba',
@@ -131,7 +132,7 @@ function Header() {
     }
   }, [isMenuOpen])
 
-  const linkClass = (id) => 'inline-flex min-h-12 items-center border-b-2 px-1 text-sm font-medium transition-colors ' +
+  const linkClass = (id) => 'inline-flex min-h-12 items-center rounded-none border-b-2 bg-transparent px-1 text-sm font-medium transition-colors ' +
       (activeSection === id
         ? 'border-secondary text-secondary'
         : 'border-transparent text-base-content/80 hover:text-secondary')
@@ -152,21 +153,23 @@ function Header() {
           if (event.relatedTarget && !event.currentTarget.contains(event.relatedTarget)) setIsMenuOpen(false)
         }}
       >
-        <div className={container + ' flex min-h-20 items-center justify-between gap-6'}>
-          <a href="#hero" onClick={() => setIsMenuOpen(false)} className="py-3 text-xl font-bold tracking-tight" aria-label="DigInMind home">
+        <div className={container + ' navbar min-h-20 justify-between gap-6 py-0'}>
+          <a href="#hero" onClick={() => setIsMenuOpen(false)} className="navbar-start w-auto shrink-0 py-3 text-xl font-bold tracking-tight" aria-label="DigInMind home">
             DigInMind<span className="text-secondary">.</span>
           </a>
-          <div className="hidden items-center gap-7 lg:flex">
+          <ul className="navbar-end menu menu-horizontal hidden w-auto gap-7 p-0 lg:flex">
             {navigationLinks.map(({ id, label }) => (
-              <a key={id} href={'#' + id} className={linkClass(id)} aria-current={activeSection === id ? 'location' : undefined}>
-                {label}
-              </a>
+              <li key={id}>
+                <a href={'#' + id} className={linkClass(id)} aria-current={activeSection === id ? 'location' : undefined}>
+                  {label}
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
           <button
             ref={menuButtonRef}
             type="button"
-            className="btn btn-ghost px-3 lg:hidden"
+            className={button + ' btn-ghost px-3 lg:hidden'}
             aria-label={isMenuOpen ? 'Close navigation' : 'Open navigation'}
             aria-expanded={isMenuOpen}
             aria-controls="primary-navigation"
@@ -180,19 +183,20 @@ function Header() {
           </button>
         </div>
         <div id="primary-navigation" hidden={!isMenuOpen} className="mobile-navigation absolute inset-x-0 top-full border-b border-base-300 bg-base-100 lg:hidden">
-          <div className={container + ' flex flex-col gap-2 py-4'}>
+          <ul className={container + ' menu gap-2 py-4'}>
             {navigationLinks.map(({ id, label }) => (
-              <a
-                key={id}
-                href={'#' + id}
-                onClick={() => setIsMenuOpen(false)}
-                className={linkClass(id)}
-                aria-current={activeSection === id ? 'location' : undefined}
-              >
-                {label}
-              </a>
+              <li key={id}>
+                <a
+                  href={'#' + id}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={linkClass(id)}
+                  aria-current={activeSection === id ? 'location' : undefined}
+                >
+                  {label}
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </nav>
     </header>
@@ -284,39 +288,53 @@ function WorkingGroups() {
           Each group is co-led by a clinical or psychology expert and an informatics expert.
           Joint working sessions connect the groups, while each retains responsibility for its own outputs.
         </p>
-        <div className="mt-10 border-t border-base-300">
+        <div className="mt-10 space-y-4">
           {workingGroups.map((group, index) => (
-            <details key={group.id} id={group.id} data-anchor="" className="collapse collapse-arrow overflow-visible rounded-none border-b border-base-300">
-              <summary className="collapse-title py-6 pl-0 pr-10">
-                <div className="grid gap-3 md:grid-cols-[1fr_1fr] md:gap-8">
-                  <div>
-                    <h3 className="text-xl font-semibold"><span className="text-secondary">WG{index + 1}</span> · {group.shortName}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-base-content/80">{group.audience}</p>
-                  </div>
-                  <p className="text-sm leading-relaxed text-base-content/80"><span className="font-semibold text-base-content">Planned outputs: </span>{group.output}</p>
-                </div>
+            <details key={group.id} id={group.id} data-anchor="" className="wg-panel collapse overflow-hidden rounded-box border bg-base-100">
+              <summary className="wg-heading collapse-title grid grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-4 gap-y-4 p-5 sm:gap-x-5 sm:p-7 lg:grid-cols-[auto_minmax(0,1.3fr)_minmax(0,1fr)_auto]">
+                <span className="wg-label inline-flex h-11 w-12 shrink-0 items-center justify-center rounded-lg text-sm font-bold sm:h-12 sm:w-14">WG{index + 1}</span>
+                <span className="min-w-0">
+                  <span role="heading" aria-level={3} className="block text-lg font-semibold leading-snug sm:text-xl">{group.shortName}</span>
+                  <span className="wg-secondary mt-2 block text-sm leading-relaxed">{group.audience}</span>
+                </span>
+                <span className="wg-outputs col-span-3 border-t pt-4 lg:col-span-1 lg:col-start-3 lg:row-start-1 lg:border-t-0 lg:pt-0">
+                  <span className="text-sm font-semibold">Planned outputs</span>
+                  <span className="wg-secondary mt-1 block text-sm leading-relaxed">{group.output}</span>
+                </span>
+                <ChevronDownIcon aria-hidden="true" className="wg-chevron col-start-3 row-start-1 mt-2 size-5 lg:col-start-4" />
               </summary>
-              <div className="collapse-content px-0">
-                <p className="max-w-prose text-lg font-medium">{group.summary}</p>
-                <p className="mt-4 max-w-prose leading-relaxed text-base-content/80">{group.purpose}</p>
-                {[group.classificationNote, group.clinicalReasoningNote, group.evaluationNote, group.responsibleAINote]
-                  .filter(Boolean).map((note) => <p key={note} className="mt-4 max-w-prose leading-relaxed text-base-content/80">{note}</p>)}
-                <div className="mt-6 grid gap-6 md:grid-cols-2">
+              <div className="wg-content collapse-content px-5 sm:px-7">
+                <div className="grid gap-7 pt-7 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:gap-10">
+                  <div className="space-y-4 leading-relaxed">
+                    <p className="wg-lead text-lg font-semibold">{group.summary}</p>
+                    <p className="max-w-prose text-base-content/80">{group.purpose}</p>
+                    {[group.classificationNote, group.clinicalReasoningNote, group.evaluationNote, group.responsibleAINote]
+                      .filter(Boolean).map((note) => <p key={note} className="max-w-prose text-base-content/80">{note}</p>)}
+                  </div>
+                  <dl className="space-y-5 border-t border-base-300 pt-5 text-sm leading-relaxed lg:border-t-0 lg:pt-0">
+                    <div><dt className="font-semibold">Relevant expertise</dt><dd className="mt-2 text-base-content/80">{group.participants}</dd></div>
+                    <div className="border-t border-base-300 pt-5"><dt className="font-semibold">Outside this group’s scope</dt><dd className="mt-2 text-base-content/80">{group.outOfScope}</dd></div>
+                  </dl>
+                </div>
+                <div className="mt-8 grid gap-6 md:grid-cols-2 md:gap-10">
                   {group.streams.map((stream) => (
-                    <div key={stream.label} className="border-t border-base-300 pt-5">
-                      <h4 className="font-semibold">{stream.label === 'A-PSY' ? 'Psychology & clinical practice (A-PSY)' : 'Informatics (B-INF)'}</h4>
+                    <div key={stream.label} className="wg-stream border-t pt-5">
+                      <h4 className="flex flex-wrap items-baseline gap-x-3 gap-y-1 font-semibold">
+                        <span className="wg-lead text-sm">{stream.label}</span>
+                        <span>{stream.label === 'A-PSY' ? 'Psychology & clinical practice' : 'Informatics'}</span>
+                      </h4>
                       <p className="mt-2 leading-relaxed text-base-content/80">{stream.description}</p>
                     </div>
                   ))}
                 </div>
-                <dl className="mt-6 max-w-prose space-y-4 leading-relaxed">
-                  <div><dt className="font-semibold">Relevant expertise</dt><dd className="mt-1 text-base-content/80">{group.participants}</dd></div>
-                  <div><dt className="font-semibold">Connections with other groups</dt><dd className="mt-1 text-base-content/80">{group.interfaces}</dd></div>
-                  <div><dt className="font-semibold">Outside this group’s scope</dt><dd className="mt-1 text-base-content/80">{group.outOfScope}</dd></div>
-                </dl>
-                <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 pb-3">
-
-                  <a href="#terminology" className="inline-flex min-h-12 items-center text-sm font-medium text-secondary underline">Explain the terminology</a>
+                <div className="mt-8 grid items-start gap-3 border-t border-base-300 pt-5 sm:grid-cols-[1fr_auto] sm:gap-8">
+                  <div className="max-w-prose text-sm leading-relaxed">
+                    <h4 className="font-semibold">Connections with other groups</h4>
+                    <p className="mt-2 text-base-content/80">{group.interfaces}</p>
+                  </div>
+                  <a href="#terminology" className="wg-lead inline-flex min-h-11 items-center gap-2 text-sm font-medium underline">
+                    Explain the terminology <ArrowRightIcon className="size-4 shrink-0" aria-hidden="true" />
+                  </a>
                 </div>
               </div>
             </details>
@@ -375,7 +393,7 @@ function Network() {
                       width="32"
                       height="20"
                       loading="lazy"
-                      className="absolute right-1 top-5 h-5 w-8 rotate-6 rounded-sm object-cover shadow-sm"
+                      className="absolute right-1 top-5 h-5 w-auto max-w-8 rotate-6 rounded-sm object-contain shadow-sm"
                     />
                   )}
                   <h3 className="font-semibold">{[member.title, member.name, member.surname].filter(Boolean).join(' ')}</h3>
@@ -421,25 +439,38 @@ function Outcomes() {
 export default function App() {
   useEffect(() => {
     // Native anchors preserve URL/history; open a disclosure for direct links too.
+    let repeatAnchorFrame
     const openHashTarget = (event) => {
       const id = window.location.hash.slice(1)
       const target = document.getElementById(id)
       if (target instanceof HTMLDetailsElement) {
         target.open = true
+        target.querySelector('summary')?.focus({ preventScroll: true })
         target.scrollIntoView({ block: 'start', behavior: 'auto' })
       } else if (target && !event) {
         // A direct URL can load before React has mounted its anchor target.
         target.scrollIntoView({ block: 'start', behavior: 'auto' })
       }
     }
+    const onAnchorClick = (event) => {
+      const link = event.target.closest?.('a[href^="#"]')
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey ||
+          !link || link.target || link.hash !== window.location.hash) return
+      // Clicking the current hash does not emit hashchange. Run after native anchor focus.
+      window.cancelAnimationFrame(repeatAnchorFrame)
+      repeatAnchorFrame = window.requestAnimationFrame(() => openHashTarget(event))
+    }
     const initialScroll = window.setTimeout(openHashTarget, 0)
     const onLoad = () => openHashTarget()
     window.addEventListener('load', onLoad)
     window.addEventListener('hashchange', openHashTarget)
+    document.addEventListener('click', onAnchorClick)
     return () => {
       window.clearTimeout(initialScroll)
+      window.cancelAnimationFrame(repeatAnchorFrame)
       window.removeEventListener('load', onLoad)
       window.removeEventListener('hashchange', openHashTarget)
+      document.removeEventListener('click', onAnchorClick)
     }
   }, [])
 
@@ -453,7 +484,7 @@ export default function App() {
             alt=""
             width="1672"
             height="941"
-            fetchPriority="high"
+            fetchpriority="high"
             aria-hidden="true"
             className="hero-artwork absolute inset-0 -z-20 h-full w-full object-cover object-[75%_center] opacity-70 sm:object-center"
           />
@@ -466,7 +497,7 @@ export default function App() {
               A COST Action proposal connecting psychology, clinical practice and informatics to advance responsible artificial intelligence for diagnosis and intervention.
             </p>
             <div className="mt-7 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-6">
-              <a href="#proposal" className="group btn cta px-6">Explore the proposal <ArrowRightIcon className="size-5 shrink-0 transition-transform duration-150 ease-out group-hover:translate-x-1 group-focus-visible:translate-x-1" aria-hidden="true" /></a>
+              <a href="#proposal" className={button + ' group btn-primary px-6'}>Explore the proposal <ArrowRightIcon className="size-5 shrink-0 transition-transform duration-150 ease-out group-hover:translate-x-1 group-focus-visible:translate-x-1" aria-hidden="true" /></a>
               <a href="#working-groups" className="inline-flex min-h-12 items-center gap-2 font-medium underline decoration-neutral-content/40 hover:decoration-neutral-content">
                 View working groups
               </a>
@@ -487,7 +518,7 @@ export default function App() {
       </main>
       <footer id="solution" tabIndex={-1} data-anchor="" className="border-t border-base-300 py-8">
         <div className={container + ' flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between'}>
-          <div><a href="#hero" className="inline-flex min-h-11 items-center font-semibold">DigInMind</a><p className="text-sm text-base-content/70">© {new Date().getFullYear()} · COST Action proposal</p><p className="mt-2 text-sm text-base-content/80">Dr Marco Cremaschi · <a href={"mailto:" + CONTACT_EMAIL} className="break-all underline">{CONTACT_EMAIL}</a></p></div>
+          <div><a href="#hero" className="inline-flex min-h-11 items-center font-semibold">DigInMind</a><p className="text-sm text-base-content/70">© {new Date().getFullYear()} · COST Action proposal</p></div>
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
             <a href={"mailto:" + CONTACT_EMAIL + "?subject=DigInMind%20proposal"} className="inline-flex min-h-11 items-center font-medium underline">Contact the proposal team</a>
             <a href="https://www.cost.eu/" className="inline-flex min-h-11 items-center underline">About COST</a>
