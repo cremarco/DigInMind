@@ -270,6 +270,25 @@ function Proposal() {
             </div>
           </div>
         </details>
+        <section id="coordination" tabIndex={-1} aria-labelledby="coordination-heading" className="mt-10 border-t border-base-300 pt-8 sm:mt-12 sm:pt-10">
+          <h3 id="coordination-heading" className="text-2xl font-semibold tracking-tight sm:text-3xl">Scientific coordination.</h3>
+          <p className="mt-3 max-w-prose leading-relaxed text-base-content/80">
+            The proposal’s two disciplinary streams are coordinated by:
+          </p>
+          <dl className="mt-7 grid gap-8 sm:grid-cols-2 sm:gap-12">
+            <div>
+              <dt className="font-medium text-base-content/80">Informatics <span className="whitespace-nowrap text-sm">(INF)</span></dt>
+              <dd className="mt-3 text-xl font-semibold tracking-tight sm:text-2xl">Marco Cremaschi</dd>
+            </div>
+            <div>
+              <dt className="font-medium text-base-content/80">Psychology &amp; clinical practice <span className="whitespace-nowrap text-sm">(PSY)</span></dt>
+              <dd className="mt-3 space-y-2 text-xl font-semibold tracking-tight sm:text-2xl">
+                <p>Antonio Preti</p>
+                <p>Francesco Bevione</p>
+              </dd>
+            </div>
+          </dl>
+        </section>
       </div>
     </section>
   )
