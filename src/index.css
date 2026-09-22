@@ -1,8 +1,101 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-body {
-  font-family: 'Inter', 'Nunito Sans', sans-serif;
+@plugin "daisyui" {
+  themes: light --default;
+  include: button, collapse;
+  logs: false;
 }
 
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-base-100: #ffffff;
+  --color-base-200: #f8fafc;
+  --color-base-300: #cbd5e1;
+  --color-base-content: #0f172a;
+  --color-primary: #fbbf24;
+  --color-primary-content: #0f172a;
+  --color-secondary: #1d4ed8;
+  --color-secondary-content: #ffffff;
+  --color-neutral: #020617;
+  --color-neutral-content: #f8fafc;
+  --radius-field: 0.25rem;
+  --radius-box: 0.75rem;
+  --depth: 0;
+  --noise: 0;
+}
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+}
+
+:root {
+  --header-height: 8rem;
+  color-scheme: light;
+  scrollbar-color: #94a3b8 #f8fafc;
+}
+
+html { scroll-behavior: auto; }
+
+body {
+  min-width: 280px;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+section[id], main[id], [data-anchor] {
+  scroll-margin-top: calc(var(--header-height) + 1.5rem);
+}
+
+h1, h2, h3 { text-wrap: balance; }
+p, li, dd { overflow-wrap: anywhere; }
+a { text-underline-offset: 0.25em; }
+
+::selection { background: #fbbf24; color: #0f172a; }
+:focus-visible { outline: 3px solid #2563eb; outline-offset: 5px; }
+.dark-surface :focus-visible { outline-color: #fbbf24; }
+
+.btn {
+  min-height: 3rem;
+  height: auto;
+  padding-block: 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  white-space: normal;
+  text-align: center;
+  box-shadow: none;
+}
+
+.btn.cta { background: #fbbf24; border-color: #fbbf24; color: #0f172a; }
+.btn.cta:hover { background: #fcd34d; border-color: #fcd34d; }
+.collapse-title { min-height: 3rem; }
+.collapse:has(> summary:focus-visible) { outline: 3px solid #2563eb; outline-offset: 4px; }
+.mobile-navigation[hidden] { display: none; }
+
+@keyframes network-arrival {
+  from {
+    clip-path: inset(0 0 0 62%);
+    filter: blur(6px);
+    opacity: 0.3;
+    transform: scale(1.025);
+  }
+  to {
+    clip-path: inset(0);
+    filter: blur(0);
+    opacity: 0.7;
+    transform: scale(1);
+  }
+}
+
+.hero-artwork {
+  animation: network-arrival 760ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform-origin: 85% 50%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
